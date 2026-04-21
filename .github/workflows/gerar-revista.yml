@@ -46,17 +46,18 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          DATA=$(date +'%d/%m/%Y' --date='TZ="America/Sao_Paulo"')
+          DATA=$(TZ="America/Sao_Paulo" date +'%d/%m/%Y')
           HORA=$(TZ="America/Sao_Paulo" date +'%H:%M')
+          TEXTO="📰 *Revista Executiva de Tecnologia*
+          ${DATA} — publicada às ${HORA}
+
+          🔗 [Abrir revista](https://aldamonte.github.io/revista/)
+
+          _Leitura em ~15 minutos • 10 notícias curadas_"
           curl -s "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
             --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
             --data-urlencode "parse_mode=Markdown" \
-            --data-urlencode "text=📰 *Revista Executiva de Tecnologia*
-${DATA} — publicada às ${HORA}
-
-🔗 [Abrir revista](https://aldamonte.github.io/revista/)
-
-_Leitura em ~15 minutos • 10 notícias curadas_" \
+            --data-urlencode "text=${TEXTO}" \
             -X POST
 
       - name: Notifica falha no Telegram
@@ -65,13 +66,14 @@ _Leitura em ~15 minutos • 10 notícias curadas_" \
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          DATA=$(date +'%d/%m/%Y')
+          DATA=$(TZ="America/Sao_Paulo" date +'%d/%m/%Y')
+          TEXTO="⚠️ *Revista Executiva — Falha na geração*
+          ${DATA} — o workflow encontrou um erro.
+
+          Verifique os logs em:
+          https://github.com/aldamonte/revista/actions"
           curl -s "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
             --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
             --data-urlencode "parse_mode=Markdown" \
-            --data-urlencode "text=⚠️ *Revista Executiva — Falha na geração*
-${DATA} — o workflow encontrou um erro.
-
-Verifique os logs em:
-https://github.com/aldamonte/revista/actions" \
+            --data-urlencode "text=${TEXTO}" \
             -X POST
