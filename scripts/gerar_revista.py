@@ -1,94 +1,77 @@
-import anthropic
-import requests
-import os
-from datetime import datetime
-import pytz
+name: Gerar Revista Executiva Diária
 
-# Fuso horário Brasil
-tz = pytz.timezone('America/Sao_Paulo')
-agora = datetime.now(tz)
-data_formatada = agora.strftime('%d/%m/%Y')
-dia_semana = ['Segunda-feira','Terça-feira','Quarta-feira',
-              'Quinta-feira','Sexta-feira','Sábado','Domingo'][agora.weekday()]
+on:
+  schedule:
+    # 07h Brasília = 10h UTC (horário de verão out–mar) ou 11h UTC (horário padrão abr–out)
+    # Ajuste para 11 se a revista chegar às 08h no horário de inverno
+    - cron: '0 10 * * 1-5'
+  workflow_dispatch: # permite rodar manualmente pelo botão no GitHub
 
-print(f"[{agora.strftime('%H:%M')}] Iniciando geração da Revista — {dia_semana}, {data_formatada}")
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # necessário para fazer commit do index.html
 
-# ── 1. CHAMA O CLAUDE ──────────────────────────────────────────────
-client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
 
-PROMPT_SISTEMA = """Você é um curador executivo de notícias de tecnologia para uma 
-profissional executiva sênior de engenharia de software baseada em São Paulo, Brasil. 
-Gere uma revista diária HTML completa com 10 notícias em 5 seções: 
-Inteligência Artificial, Mercado Financeiro, Agronegócio & TI, 
-Gestão de Pessoas & RH, e Liderança Executiva.
-Use web_search para buscar notícias reais e atuais do dia.
-NUNCA invente notícias. Retorne APENAS o HTML completo, sem markdown."""
+      - name: Configura Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
-PROMPT_USUARIO = f"""Gere a Revista Executiva de Tecnologia para hoje, 
-{dia_semana}, {data_formatada}.
+      - name: Instala dependências
+        run: pip install anthropic requests pytz
 
-INSTRUÇÕES:
-1. Busque as 10 notícias mais relevantes e recentes de hoje
-2. Priorize: MIT Tech Review, HBR, Anthropic, OpenAI, Bloomberg Tech, 
-   Exame, MIT Sloan Brasil, Embrapa, Nord Investimentos, CNN Brasil
-3. Cada notícia: manchete, resumo 3-4 linhas, impacto estratégico, link da fonte
-4. Ticker financeiro com valores reais do dia (Ibovespa, USD/BRL, Selic, IPCA, Petróleo)
-5. Use o design da Revista Executiva de Tecnologia com fundo #f5f0e8, 
-   tipografia editorial, seções coloridas por tema
-6. HTML auto-contido com <style> interno. Comece com <!DOCTYPE html>"""
+      - name: Gera a revista
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scripts/gerar_revista.py
 
-response = client.messages.create(
-    model="claude-opus-4-6",
-    max_tokens=8000,
-    tools=[{"type": "web_search_20250305", "name": "web_search"}],
-    system=PROMPT_SISTEMA,
-    messages=[{"role": "user", "content": PROMPT_USUARIO}]
-)
+      - name: Commit e push do index.html
+        run: |
+          git config user.name "Revista Bot"
+          git config user.email "bot@revista"
+          git add index.html
+          git diff --staged --quiet || git commit -m "Revista $(date +'%d/%m/%Y')"
+          git push
 
-# Extrai o HTML da resposta
-html_content = ""
-for block in response.content:
-    if block.type == "text":
-        text = block.text.strip()
-        text = text.replace("```html", "").replace("```", "").strip()
-        if "<!DOCTYPE" in text or "<html" in text:
-            html_content = text
-            break
-        html_content += text
+      - name: Notifica sucesso no Telegram
+        if: success()
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          DATA=$(date +'%d/%m/%Y' --date='TZ="America/Sao_Paulo"')
+          HORA=$(TZ="America/Sao_Paulo" date +'%H:%M')
+          curl -s "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "parse_mode=Markdown" \
+            --data-urlencode "text=📰 *Revista Executiva de Tecnologia*
+${DATA} — publicada às ${HORA}
 
-if not html_content or "<html" not in html_content:
-    raise ValueError(f"HTML inválido gerado. Resposta: {str(response.content)[:300]}")
+🔗 [Abrir revista](https://aldamonte.github.io/revista/)
 
-print(f"✅ HTML gerado — {len(html_content)} caracteres")
+_Leitura em ~15 minutos • 10 notícias curadas_" \
+            -X POST
 
-# ── 2. SALVA O index.html ──────────────────────────────────────────
-with open("index.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
+      - name: Notifica falha no Telegram
+        if: failure()
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          DATA=$(date +'%d/%m/%Y')
+          curl -s "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "parse_mode=Markdown" \
+            --data-urlencode "text=⚠️ *Revista Executiva — Falha na geração*
+${DATA} — o workflow encontrou um erro.
 
-print("✅ index.html salvo")
-
-# ── 3. ENVIA NO WHATSAPP via CallMeBot ────────────────────────────
-phone    = os.environ.get("CALLMEBOT_PHONE", "")
-apikey   = os.environ.get("CALLMEBOT_APIKEY", "")
-url_site = "https://aldamonte.github.io/revista/"
-
-if phone and apikey:
-    mensagem = (
-        f"📰 *Revista Executiva de Tecnologia*\n"
-        f"{data_formatada} — Edição de hoje no ar!\n\n"
-        f"🔗 {url_site}\n\n"
-        f"_Leitura em ~15 minutos_"
-    )
-    resp = requests.get(
-        "https://api.callmebot.com/whatsapp.php",
-        params={"phone": phone, "text": mensagem, "apikey": apikey},
-        timeout=15
-    )
-    if resp.status_code == 200:
-        print(f"✅ WhatsApp enviado para {phone}")
-    else:
-        print(f"⚠️ Erro no WhatsApp: {resp.status_code} — {resp.text[:100]}")
-else:
-    print("⚠️ Variáveis CALLMEBOT não configuradas — pulando envio")
-
-print(f"🎉 Concluído em {datetime.now(tz).strftime('%H:%M:%S')}")
+Verifique os logs em:
+https://github.com/aldamonte/revista/actions" \
+            -X POST
