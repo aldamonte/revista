@@ -1,1 +1,266 @@
+Now I have all the data needed. Let me compile the HTML newsletter.
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revista Executiva de Tecnologia — 21 de Abril de 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #f5f0e8; font-family: Georgia, 'Times New Roman', serif; color: #2a2a2a; line-height: 1.7; }
+
+  /* HEADER */
+  .header { background: #2e3f52; color: #f5f0e8; padding: 40px 20px 30px; text-align: center; border-bottom: 4px solid #c9a84c; }
+  .header-label { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: #c9a84c; margin-bottom: 6px; }
+  .header h1 { font-size: 38px; font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
+  .header .edition { font-size: 14px; color: #a0b4c8; font-style: italic; }
+
+  /* TICKER BAR */
+  .ticker-bar { background: #111; color: #e0e0e0; padding: 12px 20px; font-family: 'Courier New', monospace; font-size: 13px; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; border-bottom: 2px solid #c9a84c; }
+  .ticker-item { white-space: nowrap; }
+  .ticker-item .label { color: #888; }
+  .ticker-item .value { color: #c9a84c; font-weight: bold; }
+  .ticker-item .change-up { color: #4caf50; }
+  .ticker-item .change-down { color: #e74c3c; }
+
+  /* MAIN CONTAINER */
+  .container { max-width: 920px; margin: 0 auto; padding: 30px 20px; }
+
+  /* SECTION HEADERS */
+  .section-header { display: flex; align-items: center; gap: 12px; margin: 36px 0 18px; padding-bottom: 10px; border-bottom: 2px solid; }
+  .section-header .section-icon { font-size: 22px; }
+  .section-header h2 { font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+  .section-header .section-count { font-size: 12px; color: #888; font-style: italic; margin-left: auto; }
+
+  .sec-ai { border-color: #5b78a3; }
+  .sec-ai h2 { color: #5b78a3; }
+  .sec-fin { border-color: #2e7d5b; }
+  .sec-fin h2 { color: #2e7d5b; }
+  .sec-agro { border-color: #8b6f2e; }
+  .sec-agro h2 { color: #8b6f2e; }
+  .sec-rh { border-color: #8e4585; }
+  .sec-rh h2 { color: #8e4585; }
+  .sec-lid { border-color: #c0392b; }
+  .sec-lid h2 { color: #c0392b; }
+
+  /* LEAD STORY */
+  .lead-story { background: #2e3f52; color: #f5f0e8; border-radius: 8px; padding: 32px 28px; margin-bottom: 24px; position: relative; overflow: hidden; }
+  .lead-story::before { content: 'DESTAQUE'; position: absolute; top: 14px; right: 20px; font-size: 10px; letter-spacing: 3px; color: #c9a84c; font-weight: bold; }
+  .lead-story h3 { font-size: 24px; line-height: 1.35; margin-bottom: 14px; color: #fff; }
+  .lead-story .summary { font-size: 15px; line-height: 1.75; color: #c8d6e5; margin-bottom: 16px; }
+  .lead-story .impact { background: rgba(201,168,76,0.15); border-left: 3px solid #c9a84c; padding: 12px 16px; border-radius: 0 6px 6px 0; font-size: 13px; color: #e8dcc8; margin-bottom: 14px; }
+  .lead-story .impact strong { color: #c9a84c; }
+  .lead-story .source-link { font-size: 12px; }
+  .lead-story .source-link a { color: #c9a84c; text-decoration: none; }
+  .lead-story .source-link a:hover { text-decoration: underline; }
+
+  /* NEWS CARD */
+  .news-card { background: #fff; border: 1px solid #e0d9cc; border-radius: 6px; padding: 22px 24px; margin-bottom: 18px; transition: box-shadow 0.2s; }
+  .news-card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
+  .news-card h3 { font-size: 18px; line-height: 1.4; margin-bottom: 10px; color: #2a2a2a; }
+  .news-card .summary { font-size: 14px; color: #444; margin-bottom: 12px; }
+  .news-card .impact { background: #f9f6f0; border-left: 3px solid #c9a84c; padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 13px; color: #555; margin-bottom: 12px; }
+  .news-card .impact strong { color: #8b6f2e; }
+  .news-card .source-link { font-size: 12px; color: #888; }
+  .news-card .source-link a { color: #5b78a3; text-decoration: none; }
+  .news-card .source-link a:hover { text-decoration: underline; }
+
+  /* FOOTER */
+  .footer { background: #111; color: #888; text-align: center; padding: 30px 20px; margin-top: 40px; font-size: 12px; line-height: 1.8; }
+  .footer .brand { color: #c9a84c; font-size: 14px; font-weight: bold; letter-spacing: 2px; margin-bottom: 6px; }
+  .footer a { color: #c9a84c; text-decoration: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .header h1 { font-size: 26px; }
+    .lead-story { padding: 22px 18px; }
+    .lead-story h3 { font-size: 20px; }
+    .container { padding: 20px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-label">Curadoria Executiva Diária</div>
+  <h1>Revista Executiva de Tecnologia</h1>
+  <div class="edition">Terça-feira, 21 de Abril de 2026 · São Paulo, Brasil · Edição #112</div>
+</header>
+
+<!-- TICKER BAR -->
+<div class="ticker-bar">
+  <span class="ticker-item"><span class="label">IBOV </span><span class="value">196.132</span> <span class="change-up">+0,20%</span></span>
+  <span class="ticker-item"><span class="label">USD/BRL </span><span class="value">R$ 4,98</span> <span class="change-down">▼ -0,18%</span></span>
+  <span class="ticker-item"><span class="label">Selic Focus </span><span class="value">13,00%</span> <span class="change-up">▲</span></span>
+  <span class="ticker-item"><span class="label">IPCA Focus </span><span class="value">4,80%</span> <span class="change-up">▲ 6ª alta</span></span>
+  <span class="ticker-item"><span class="label">Brent </span><span class="value">US$ 98,48</span> <span class="change-up">+3,14%</span></span>
+  <span class="ticker-item"><span class="label">DXY </span><span class="value">98,05</span> <span class="change-down">▼ -0,05%</span></span>
+</div>
+
+<div class="container">
+
+<!-- ===================== SEÇÃO 1: INTELIGÊNCIA ARTIFICIAL ===================== -->
+<div class="section-header sec-ai">
+  <span class="section-icon">🤖</span>
+  <h2>Inteligência Artificial</h2>
+  <span class="section-count">3 notícias</span>
+</div>
+
+<!-- LEAD STORY -->
+<article class="lead-story">
+  <h3>Stanford AI Index 2026: IA avança mais rápido que PC e internet — mas transparência despenca</h3>
+  <p class="summary">
+    O relatório anual do Stanford HAI, publicado em abril, apresenta um retrato duplo da IA em 2026. Por um lado, a adoção generativa atingiu 53% da população mundial em apenas três anos, ritmo superior ao do computador pessoal e da internet. Por outro lado, o índice de transparência dos grandes modelos caiu de 58 para 40 pontos, com os modelos mais capazes sendo os menos transparentes. Os EUA e a China disputam cabeça a cabeça, enquanto Anthropic lidera marginalmente os rankings de desempenho.
+  </p>
+  <div class="impact">
+    <strong>⚡ Impacto para Líderes de Engenharia:</strong> A corrida por modelos cada vez mais poderosos está criando uma "caixa-preta" regulatória. VPs de Engenharia devem priorizar frameworks de governança de IA e auditoria de modelos nos seus roadmaps, antes que regulações externas imponham padrões que limitem a agilidade da organização.
+  </div>
+  <div class="source-link">📎 Fonte: <a href="https://hai.stanford.edu/news/inside-the-ai-index-12-takeaways-from-the-2026-report" target="_blank">Stanford HAI — AI Index 2026</a> · <a href="https://www.technologyreview.com/2026/04/13/1135675/want-to-understand-the-current-state-of-ai-check-out-these-charts/" target="_blank">MIT Technology Review</a></div>
+</article>
+
+<article class="news-card">
+  <h3>MCP da Anthropic atinge 97 milhões de downloads e consolida padrão universal para agentes de IA</h3>
+  <p class="summary">
+    O Model Context Protocol (MCP) atingiu 97 milhões de downloads mensais de SDKs, com mais de 10.000 servidores ativos em produção. Em dezembro de 2025, a Anthropic doou o protocolo à Agentic AI Foundation sob a Linux Foundation, co-fundada com OpenAI e Block, consolidando-o como o "USB-C da IA". Em abril de 2026, o primeiro MCP Dev Summit em Nova York reuniu 1.200 participantes.
+  </p>
+  <div class="impact">
+    <strong>⚡ Impacto para Líderes de Engenharia:</strong> O MCP tornou-se infraestrutura crítica. Líderes de engenharia precisam definir uma estratégia MCP imediata: produtos SaaS sem servidor MCP compatível serão invisíveis para agentes de IA até 2027. Priorize a exposição dos seus sistemas internos via MCP para habilitar workflows agentic.
+  </div>
+  <div class="source-link">📎 Fonte: <a href="https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation" target="_blank">Anthropic</a> · <a href="https://en.wikipedia.org/wiki/Model_Context_Protocol" target="_blank">Wikipedia — MCP</a></div>
+</article>
+
+<article class="news-card">
+  <h3>PwC: 75% dos ganhos econômicos da IA concentrados em apenas 20% das empresas</h3>
+  <p class="summary">
+    Estudo global da PwC com 1.217 executivos seniores revela que uma minoria de empresas captura a esmagadora maioria dos retornos financeiros com IA. As líderes são 2,6 vezes mais propensas a usar IA para reinvenção de modelo de negócios e duas a três vezes mais propensas a buscar oportunidades de convergência entre indústrias. A captura de crescimento via convergência setorial é o fator mais forte de performance financeira com IA.
+  </p>
+  <div class="impact">
+    <strong>⚡ Impacto para Líderes de Engenharia:</strong> Não basta usar IA para eficiência operacional. O estudo deixa claro que o diferencial está em usar IA como motor de reinvenção. CTOs devem criar squads dedicados à exploração de modelos de negócio adjacentes habilitados por IA, não apenas otimizar processos existentes.
+  </div>
+  <div class="source-link">📎 Fonte: <a href="https://www.pwc.com/gx/en/news-room/press-releases/2026/pwc-2026-ai-performance-study.html" target="_blank">PwC — 2026 AI Performance Study</a></div>
+</article>
+
+<!-- ===================== SEÇÃO 2: MERCADO FINANCEIRO ===================== -->
+<div class="section-header sec-fin">
+  <span class="section-icon">📊</span>
+  <h2>Mercado Financeiro</h2>
+  <span class="section-count">2 notícias</span>
+</div>
+
+<article class="news-card">
+  <h3>Ibovespa fecha em alta no pré-feriado; dólar cai abaixo de R$ 5 pela 2ª sessão consecutiva</h3>
+  <p class="summary">
+    Na segunda-feira (20), véspera do feriado de Tiradentes, o Ibovespa encerrou com alta de 0,20%, aos 196.132 pontos, acumulando ganho de 21,73% em 2026. O dólar comercial caiu 0,18%, cotado a R$ 4,97. A Petrobras (PETR4) foi novamente a ação mais negociada do dia, com alta de 1,73%, acompanhando o avanço do petróleo. Tensões entre EUA e Irã seguem no centro das atenções.
+  </p>
+  <div class="impact">
+    <strong>⚡ Impacto para Líderes de Engenharia:</strong> O real valorizado e fluxo estrangeiro recorde (R$ 65 bi no ano) beneficiam orçamentos de tecnologia atrelados ao dólar — é janela para renegociar contratos de cloud, licenças e SaaS internacional. Porém, a escalada do petróleo e a Selic projetada em 13% exigem cautela no planejamento de capex.
+  </div>
+  <div class="source-link">📎 Fonte: <a href="https://www.infomoney.com.br/mercados/ibovespa-hoje-bolsa-de-valores-ao-vivo-20042026/" target="_blank">InfoMoney</a> · <a href="https://www.nordinvestimentos.com.br/blog/ibovespa-hoje-bolsa-de-valores-ao-vivo-20-abril-2026/" target="_blank">Nord Investimentos</a></div>
+</article>
+
+<article class="news-card">
+  <h3>Boletim Focus: Selic sobe para 13% e IPCA atinge 4,80% — deterioração de expectativas acelera</h3>
+  <p class="summary">
+    O Boletim Focus divulgado pelo Banco Central em 20/04 traz deterioração nas expectativas para 2026: a projeção para o IPCA subiu pela 6ª semana consecutiva (de 4,71% para 4,80%), bem acima do teto da meta de 4,5%. A Selic projetada saltou de 12,50% para 13,00%. Em contrapartida, a projeção do dólar recuou para R$ 5,30. A próxima reunião do Copom está marcada para 28-29 de abril.
+  </p>
+  <div class="impact">
+    <strong>⚡ Impacto para Líderes de Engenharia:</strong> Selic em 13% encarece o custo de capital e pressiona múltiplos de tecnologia. Para líderes de engenharia, isso reforça a necessidade de provar ROI concreto em cada iniciativa. Projetos de IA precisam demonstrar payback acelerado — abandone pilotos que não gerem valor mensurável em 90 dias.
+  </div>
+  <div class="source-link">📎 Fonte: <a href="https://www.infomoney.com.br/economia/boletim-focus-projecoes-macroeconomicas-20042026/" target="_blank">InfoMoney</a> · <a href="https://www.cnnbrasil.com.br/economia/macroeconomia/boletim-focus-previsoes-de-ipca-sobem-pela-6a-semana-consecutiva/" target="_blank">CNN Brasil</a></div>
+</article>
+
+<!-- ===================== SEÇÃO 3: AGRONEGÓCIO & TI ===================== -->
+<div class="section-header sec-agro">
+  <span class="section-icon">🌾</span>
+  <h2>Agronegócio &amp; TI</h2>
+  <span class="section-count">2 notícias</span>
+</div>
+
+<article class="news-card">
+  <h3>Embrapa lança plataformas digitais e IA na Agrishow 2026: do BTMAX ao farm lab AgNest</h3>
+  <p class="summary">
+    Na Agrishow 2026, a Embrapa apresentou inovações que combinam IA, IoT, nanotecnologia e fotônica para agricultura de precisão. Entre os destaques, o BTMAX — primeiro milho transgênico 100% brasileiro — e o AgNest, farm lab com governança compartilhada com Banco do Brasil e FAESP. A unidade Embrapii ITECH-Agro conecta demandas do setor produtivo com soluções de inteligência artificial.
+  </p>
+  <div class="impact">
+    <strong>⚡ Impacto para Líderes de Engenharia:</strong> A convergência agro-tech demanda arquiteturas de edge computing robustas. Empresas de software que atenderem o agronegócio em 2026 precisarão de pipelines de dados que funcionem offline-first e sincronizem em ambientes de conectividade intermitente — um design pattern que líderes de engenharia devem dominar.
+  </div>
+  <div class="source-link">📎 Fonte: <a href="https://www.embrapa.br/busca-de-noticias/-/noticia/115580721/embrapa-apresenta-inovacoes-em-sustentabilidade-bioeconomia-e-agricultura-digital-na-agrishow-2026" target="_blank">Embrapa</a></div>
+</article>
+
+<article class="news-card">
+  <h3>Agro Summit 2026: digitalização "da porteira ao consumidor" redefine gestão no campo</h3>
+  <p class="summary">
+    O Agro Summit 2026, em maio em Campinas, terá como tema central a digitalização da gestão no agronegócio da origem ao consumidor final. Com apoio de Embrapa, ABAG e Aprosoja, o evento reunirá cases de sucesso em IA aplicada ao agro, rastreabilidade, agroindústria e plataformas digitais integradas. A TOTVS destaca que atende 47 das 100 maiores empresas do setor.
+  </p>
+  <div class="impact">
+    <strong>⚡ Impacto para Líderes de Engenharia:</strong> Com a Reforma Tributária (IBS/CBS) exigindo adaptação massiva de ERPs, líderes de plataformas devem preparar arquiteturas fiscais flexíveis. A rastreabilidade "depois da porteira" será requisito de mercado para exportações — oportunidade real para empresas de software B2B.
+  </div>
+  <div class="source-link">📎 Fonte: <a href="https://portal.agrosummit.com.br/agro-summit-2026-destaca-digitalizacao-como-pilar-de-gestao-do-agronegocio-em-cenario-de-desafios" target="_blank">Portal Agro Summit</a></div>
+</article>
+
+<!-- ===================== SEÇÃO 4: GESTÃO DE PESSOAS & RH ===================== -->
+<div class="section-header sec-rh">
+  <span class="section-icon">👥</span>
+  <h2>Gestão de Pessoas &amp; RH</h2>
+  <span class="section-count">2 notícias</span>
+</div>
+
+<article class="news-card">
+  <h3>Gartner: IA no RH pode gerar 29% de ganho de produtividade — mas redesenho humano-máquina é prioridade #1</h3>
+  <p class="summary">
+    A pesquisa Gartner HR Priorities 2026, com 426 diretores de RH de 23 setores e 4 regiões, revela quatro prioridades: usar IA para revolucionar o RH (com ganhos de até 29% em produtividade), moldar o trabalho na era humano-máquina, mobilizar líderes para crescimento em incerteza e integrar cultura para impulsionar performance. A transformação impulsionada por IA lidera a agenda.
+  </p>
+  <div class="impact">
+    <strong>⚡ Impacto para Líderes de Engenharia:</strong> O RH será o primeiro departamento a ver ganhos massivos com IA — o que cria expectativa para que engenharia faça o mesmo. Líderes técnicos devem colaborar com RH na implantação de People Analytics com IA e, simultaneamente, preparar suas equipes para novos papéis em um modelo humano-máquina.
+  </div>
+  <div class="source-link">📎 Fonte: <a href="https://www.gartner.com.br/pt-br/recursos-humanos/tendencias/principais-prioridades-para-lideres-de-rh" target="_blank">Gartner — HR Priorities 2026</a></div>
+</article>
+
+<article class="news-card">
+  <h3>GPTW 2026: liderança é prioridade #1 pelo 5º ano — mas empatia cai e entrega de resultados sobe ao topo</h3>
+  <p class="summary">
+    A pesquisa Tendências em Gestão de Pessoas 2026 do GPTW revela que desenvolvimento de liderança atinge o maior índice da série histórica. Porém, a empatia — que dominou os últimos 3 anos — caiu para o 4º lugar nas competências desejadas. Entrega de resultados, comunicação eficiente e resiliência emocional assumem o topo. Apenas 24% das empresas usam IA intensamente, mas o RH lidera a adoção com 51%.
+  </p>
+  <div class="impact">
+    <strong>⚡ Impacto para Líderes de Engenharia:</strong> O deslocamento da empatia para resultados reflete pressão por performance em cenário volátil. Para VPs de engenharia, o recado é claro: formação de tech leads deve equilibrar entrega técnica com inteligência emocional e comunicação assertiva — não um ou outro, mas ambos.
+  </div>
+  <div class="source-link">📎 Fonte: <a href="https://gptw.com.br/conteudo/artigos/tendencias-de-gestao-de-pessoas/" target="_blank">GPTW Brasil — Tendências 2026</a></div>
+</article>
+
+<!-- ===================== SEÇÃO 5: LIDERANÇA EXECUTIVA ===================== -->
+<div class="section-header sec-lid">
+  <span class="section-icon">🎯</span>
+  <h2>Liderança Executiva</h2>
+  <span class="section-count">1 notícia</span>
+</div>
+
+<article class="news-card">
+  <h3>IBM e FDC: 95% dos executivos veem decisão rápida como vantagem competitiva essencial em 2026</h3>
+  <p class="summary">
+    O Business Trends Report 2026 da IBM e análises da Fundação Dom Cabral apontam que 95% dos executivos globais consideram a capacidade de tomar decisões rápidas como vantagem competitiva essencial diante da volatilidade do mercado. A FDC destaca quatro movimentos prioritários: ciclos curtos de revisão substituindo planejamentos estáticos, competências cognitivas e analíticas para gestores, prototipagem com critérios éticos e liderança que una tecnologia e humanidade.
+  </p>
+  <div class="impact">
+    <strong>⚡ Impacto para Líderes de Engenharia:</strong> A mensagem para engineering leaders é transformadora: abandone roadmaps anuais rígidos e adote ciclos de decisão trimestrais. Use IA para simulação de cenários e dashboards preditivos que acelerem decisões arquiteturais. O líder de 2026 não é quem sabe mais — é quem decide melhor e mais rápido com informação incompleta.
+  </div>
+  <div class="source-link">📎 Fonte: <a href="https://sejarelevante.fdc.org.br/megatendencias-lideranca-2026/" target="_blank">FDC — Megatendências de Liderança 2026</a> · <a href="https://sejarelevante.fdc.org.br/tendencias-2026-como-liderancas-podem-se-preparar/" target="_blank">FDC — Tendências 2026</a></div>
+</article>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="brand">REVISTA EXECUTIVA DE TECNOLOGIA</div>
+  <p>Curadoria diária para líderes seniores de engenharia de software · São Paulo, Brasil</p>
+  <p>Edição de 21/04/2026 · Terça-feira · Feriado de Tiradentes (Bolsa fechada)</p>
+  <p style="margin-top: 10px; font-size: 11px; color: #555;">
+    Dados de mercado referentes ao último pregão (20/04). Petróleo Brent referente ao fechamento de 21/04.<br>
+    Fontes: Stanford HAI, Anthropic, PwC, InfoMoney, Nord Investimentos, CNN Brasil, BCB Focus,<br>
+    Embrapa, Agro Summit, Gartner, GPTW Brasil, FDC, Trading Economics.<br>
+    Esta publicação é informativa e não constitui recomendação de investimento.
+  </p>
+</footer>
+
+</body>
+</html>
