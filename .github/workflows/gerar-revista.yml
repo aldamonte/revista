@@ -1,0 +1,40 @@
+name: Gerar Revista Executiva Diária
+
+on:
+  schedule:
+    # Cron do GitHub Actions roda em UTC. 07h Brasília = 10h UTC (horário de verão) ou 11h UTC
+    - cron: '0 10 * * 1-5'
+  workflow_dispatch:  # permite rodar manualmente pelo botão no GitHub
+
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # necessário para fazer commit
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configura Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instala dependências
+        run: pip install anthropic requests
+
+      - name: Gera a revista
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CALLMEBOT_PHONE: ${{ secrets.CALLMEBOT_PHONE }}
+          CALLMEBOT_APIKEY: ${{ secrets.CALLMEBOT_APIKEY }}
+        run: python scripts/gerar_revista.py
+
+      - name: Commit e push do index.html
+        run: |
+          git config user.name "Revista Bot"
+          git config user.email "bot@revista"
+          git add index.html
+          git diff --staged --quiet || git commit -m "Revista $(date +'%d/%m/%Y')"
+          git push
