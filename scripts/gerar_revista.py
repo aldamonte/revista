@@ -1,77 +1,93 @@
-name: Gerar Revista Executiva Diária
+import anthropic
+import requests
+import os
+from datetime import datetime
+import pytz
 
-on:
-  schedule:
-    # 07h Brasília = 10h UTC (horário de verão out–mar) ou 11h UTC (horário padrão abr–out)
-    # Ajuste para 11 se a revista chegar às 08h no horário de inverno
-    - cron: '0 10 * * 1-5'
-  workflow_dispatch: # permite rodar manualmente pelo botão no GitHub
+# ── CONFIGURAÇÃO ──────────────────────────────────────────────────
+tz = pytz.timezone('America/Sao_Paulo')
+agora = datetime.now(tz)
+data_formatada = agora.strftime('%d/%m/%Y')
+dia_semana = [
+    'Segunda-feira', 'Terça-feira', 'Quarta-feira',
+    'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'
+][agora.weekday()]
 
-jobs:
-  gerar:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write # necessário para fazer commit do index.html
+print(f"[{agora.strftime('%H:%M')}] Iniciando geração — {dia_semana}, {data_formatada}")
 
-    steps:
-      - name: Checkout do repositório
-        uses: actions/checkout@v4
+# ── 1. CHAMA O CLAUDE ──────────────────────────────────────────────
+client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
-      - name: Configura Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
+PROMPT_SISTEMA = """Você é um curador executivo de notícias de tecnologia para uma 
+profissional executiva sênior de engenharia de software baseada em São Paulo, Brasil. 
+Gere uma revista diária HTML completa com 10 notícias em 5 seções: 
+Inteligência Artificial, Mercado Financeiro, Agronegócio & TI, 
+Gestão de Pessoas & RH, e Liderança Executiva.
+Use web_search para buscar notícias reais e atuais do dia.
+NUNCA invente notícias. Retorne APENAS o HTML completo, sem markdown."""
 
-      - name: Instala dependências
-        run: pip install anthropic requests pytz
+PROMPT_USUARIO = f"""Gere a Revista Executiva de Tecnologia para hoje,
+{dia_semana}, {data_formatada}.
 
-      - name: Gera a revista
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python scripts/gerar_revista.py
+INSTRUÇÕES:
+1. Busque as 10 notícias mais relevantes e recentes de hoje nas categorias:
+   IA/Tecnologia, Mercado Financeiro Brasil, Agronegócio Digital,
+   Gestão de Pessoas/RH, Liderança Executiva
+2. Priorize fontes: MIT Technology Review, Harvard Business Review, Anthropic,
+   OpenAI, Bloomberg Tech, Exame, MIT Sloan Brasil, Embrapa,
+   Nord Investimentos, CNN Brasil
+3. Cada notícia deve ter: manchete impactante, resumo 3-4 linhas preservando
+   a essência, análise de impacto estratégico para líderes de engenharia,
+   e link para a fonte original
+4. No ticker financeiro use os valores reais do dia
+   (Ibovespa, USD/BRL, Selic Focus, IPCA, Petróleo)
+5. Use o design da Revista Executiva de Tecnologia:
+   - Fundo: #f5f0e8 (creme)
+   - Tipografia editorial com Georgia
+   - Seções com cores distintas por tema
+   - Cards com bordas sutis
+   - Destaque principal (lead story) em fundo escuro #2e3f52
+   - Ticker bar em fundo preto
+   - Rodapé em fundo preto
+6. HTML auto-contido com todos os estilos em tag <style> no <head>
+7. Comece com <!DOCTYPE html> e termine com </html>"""
 
-      - name: Commit e push do index.html
-        run: |
-          git config user.name "Revista Bot"
-          git config user.email "bot@revista"
-          git add index.html
-          git diff --staged --quiet || git commit -m "Revista $(date +'%d/%m/%Y')"
-          git push
+print("Chamando Claude Opus 4.6 com web_search...")
 
-      - name: Notifica sucesso no Telegram
-        if: success()
-        env:
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: |
-          DATA=$(date +'%d/%m/%Y' --date='TZ="America/Sao_Paulo"')
-          HORA=$(TZ="America/Sao_Paulo" date +'%H:%M')
-          curl -s "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
-            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
-            --data-urlencode "parse_mode=Markdown" \
-            --data-urlencode "text=📰 *Revista Executiva de Tecnologia*
-${DATA} — publicada às ${HORA}
+response = client.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=8000,
+    tools=[{"type": "web_search_20250305", "name": "web_search"}],
+    system=PROMPT_SISTEMA,
+    messages=[{"role": "user", "content": PROMPT_USUARIO}]
+)
 
-🔗 [Abrir revista](https://aldamonte.github.io/revista/)
+# ── 2. EXTRAI O HTML ───────────────────────────────────────────────
+html_content = ""
+for block in response.content:
+    if block.type == "text":
+        text = block.text.strip()
+        # Remove possíveis blocos markdown que o modelo possa incluir
+        text = text.replace("```html", "").replace("```", "").strip()
+        if "<!DOCTYPE" in text or "<html" in text:
+            html_content = text
+            break
+        html_content += text
 
-_Leitura em ~15 minutos • 10 notícias curadas_" \
-            -X POST
+if not html_content or "<html" not in html_content:
+    raise ValueError(
+        f"HTML inválido gerado pelo Claude.\n"
+        f"Primeiros 500 chars da resposta: {str(response.content)[:500]}"
+    )
 
-      - name: Notifica falha no Telegram
-        if: failure()
-        env:
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: |
-          DATA=$(date +'%d/%m/%Y')
-          curl -s "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
-            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
-            --data-urlencode "parse_mode=Markdown" \
-            --data-urlencode "text=⚠️ *Revista Executiva — Falha na geração*
-${DATA} — o workflow encontrou um erro.
+print(f"✅ HTML gerado com sucesso — {len(html_content):,} caracteres")
 
-Verifique os logs em:
-https://github.com/aldamonte/revista/actions" \
-            -X POST
+# ── 3. SALVA O index.html ──────────────────────────────────────────
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("✅ index.html salvo no repositório")
+print(f"🎉 Script concluído em {datetime.now(tz).strftime('%H:%M:%S')}")
+
+# Nota: a notificação no Telegram é feita diretamente pelo step do GitHub Actions
+# após o commit/push, garantindo que só notifica quando tudo funcionou.
