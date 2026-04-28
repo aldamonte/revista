@@ -1,83 +1,101 @@
-Now I have all the data I need. Let me compile the HTML magazine.
+Now I have all the data needed. Let me compile the HTML newsletter:
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revista Executiva de Tecnologia — 27 de Abril de 2026</title>
+<title>Revista Executiva de Tecnologia — 28 de Abril de 2026</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: Georgia, 'Times New Roman', serif; background: #f5f0e8; color: #2c2c2c; line-height: 1.7; }
+  body { background: #f5f0e8; font-family: Georgia, 'Times New Roman', serif; color: #2c2c2c; line-height: 1.7; }
+  .container { max-width: 920px; margin: 0 auto; padding: 0 20px; }
 
   /* HEADER */
-  .header { background: #2e3f52; color: #f5f0e8; padding: 40px 24px 30px; text-align: center; border-bottom: 4px solid #c9a84c; }
-  .header-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #c9a84c; margin-bottom: 6px; }
-  .header h1 { font-size: 36px; font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
-  .header .edition { font-size: 14px; color: #a0b4c8; font-style: italic; }
-  .header .date { font-size: 13px; color: #8899aa; margin-top: 4px; }
+  .header { background: #2e3f52; color: #f5f0e8; padding: 40px 0 30px; text-align: center; border-bottom: 4px solid #c9a84c; }
+  .header-label { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: #c9a84c; margin-bottom: 6px; }
+  .header h1 { font-size: 38px; font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
+  .header .edition { font-size: 14px; color: #b0bec5; font-style: italic; }
+  .header .tagline { font-size: 12px; color: #8a9aa8; margin-top: 8px; letter-spacing: 2px; text-transform: uppercase; }
 
-  /* TICKER BAR */
-  .ticker-bar { background: #111; color: #e0d9c8; padding: 12px 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; font-size: 13px; letter-spacing: 0.5px; border-bottom: 2px solid #c9a84c; }
-  .ticker-item { display: inline-flex; align-items: center; gap: 6px; }
-  .ticker-item .label { color: #8899aa; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
-  .ticker-item .value { color: #f0e6d0; font-weight: bold; }
-  .ticker-item .change-down { color: #e85d5d; font-size: 12px; }
-  .ticker-item .change-up { color: #5dbe5d; font-size: 12px; }
+  /* TICKER */
+  .ticker-bar { background: #111; color: #c9a84c; padding: 12px 0; font-size: 13px; letter-spacing: 0.5px; overflow: hidden; border-bottom: 2px solid #c9a84c; }
+  .ticker-content { display: flex; justify-content: center; flex-wrap: wrap; gap: 18px; }
+  .ticker-item { display: inline-block; white-space: nowrap; }
+  .ticker-item .label { color: #8a9aa8; margin-right: 4px; }
+  .ticker-item .value { color: #f5f0e8; font-weight: bold; }
+  .ticker-item .change-down { color: #ef5350; }
+  .ticker-item .change-up { color: #66bb6a; }
   .ticker-sep { color: #444; }
 
-  /* MAIN CONTAINER */
-  .container { max-width: 900px; margin: 0 auto; padding: 30px 20px; }
+  /* LEAD STORY */
+  .lead-section { background: #2e3f52; padding: 40px 0 36px; border-bottom: 3px solid #c9a84c; }
+  .lead-section .lead-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #c9a84c; margin-bottom: 10px; }
+  .lead-section h2 { font-size: 28px; color: #fff; margin-bottom: 14px; line-height: 1.35; }
+  .lead-section .lead-summary { font-size: 16px; color: #cfd8dc; line-height: 1.8; margin-bottom: 14px; }
+  .lead-section .lead-impact { background: rgba(201,168,76,0.12); border-left: 3px solid #c9a84c; padding: 12px 16px; color: #e0d6c2; font-size: 14px; margin-bottom: 14px; border-radius: 0 4px 4px 0; }
+  .lead-section .lead-impact strong { color: #c9a84c; }
+  .lead-section .source-link { font-size: 12px; color: #8a9aa8; }
+  .lead-section .source-link a { color: #c9a84c; text-decoration: none; }
+  .lead-section .source-link a:hover { text-decoration: underline; }
 
-  /* SECTION */
-  .section { margin-bottom: 40px; }
-  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #d1c7b0; }
-  .section-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; flex-shrink: 0; }
-  .section-title { font-size: 22px; font-weight: 700; letter-spacing: 0.5px; }
-  .section-subtitle { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 2px; }
+  /* SECTIONS */
+  .section { padding: 36px 0 20px; border-bottom: 1px solid #ddd3c2; }
+  .section-header { display: flex; align-items: center; margin-bottom: 24px; gap: 12px; }
+  .section-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #fff; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; letter-spacing: 1px; }
+  .section-line { flex: 1; height: 1px; }
 
   /* CARDS */
-  .card { background: #fff; border: 1px solid #e0d8cc; border-radius: 6px; padding: 24px; margin-bottom: 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); transition: box-shadow 0.2s; }
-  .card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
-  .card h3 { font-size: 18px; font-weight: 700; color: #2e3f52; margin-bottom: 10px; line-height: 1.4; }
-  .card .summary { font-size: 14.5px; color: #444; margin-bottom: 12px; line-height: 1.7; }
-  .card .impact { background: #f8f5ee; border-left: 3px solid #c9a84c; padding: 10px 14px; font-size: 13px; color: #555; margin-bottom: 12px; border-radius: 0 4px 4px 0; }
-  .card .impact strong { color: #2e3f52; }
-  .card .source { font-size: 12px; color: #999; }
-  .card .source a { color: #5a7a9a; text-decoration: none; }
-  .card .source a:hover { text-decoration: underline; }
+  .card { background: #fff; border: 1px solid #e0d6c2; border-radius: 6px; padding: 22px 24px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+  .card h3 { font-size: 18px; margin-bottom: 10px; line-height: 1.4; }
+  .card .summary { font-size: 14px; color: #444; margin-bottom: 12px; }
+  .card .impact { background: #faf6ee; border-left: 3px solid #c9a84c; padding: 10px 14px; font-size: 13px; color: #5a5040; margin-bottom: 10px; border-radius: 0 4px 4px 0; }
+  .card .impact strong { color: #8b7230; }
+  .card .meta { font-size: 11px; color: #999; }
+  .card .meta a { color: #6a8caf; text-decoration: none; }
+  .card .meta a:hover { text-decoration: underline; }
 
-  /* LEAD STORY */
-  .lead-card { background: #2e3f52; color: #f0e6d0; border: none; }
-  .lead-card h3 { color: #f0e6d0; font-size: 22px; }
-  .lead-card .summary { color: #c8bda8; }
-  .lead-card .impact { background: rgba(255,255,255,0.08); border-left-color: #c9a84c; color: #bbb; }
-  .lead-card .impact strong { color: #f0e6d0; }
-  .lead-card .source a { color: #a0c4e8; }
-  .lead-card .tag { display: inline-block; background: #c9a84c; color: #2e3f52; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 3px 10px; border-radius: 3px; margin-bottom: 12px; }
+  /* COLOR THEMES */
+  .theme-ia .section-icon { background: #5c6bc0; }
+  .theme-ia .section-title { color: #5c6bc0; }
+  .theme-ia .section-line { background: #5c6bc0; }
+  .theme-ia .card { border-top: 3px solid #5c6bc0; }
+  .theme-ia .card h3 { color: #3949ab; }
 
-  /* SECTION COLORS */
-  .color-ai { background: #3a7bd5; }
-  .color-finance { background: #2e8b57; }
-  .color-agro { background: #8b6914; }
-  .color-rh { background: #9b59b6; }
-  .color-leadership { background: #c0392b; }
+  .theme-fin .section-icon { background: #00897b; }
+  .theme-fin .section-title { color: #00897b; }
+  .theme-fin .section-line { background: #00897b; }
+  .theme-fin .card { border-top: 3px solid #00897b; }
+  .theme-fin .card h3 { color: #00695c; }
 
-  .section-ai .section-title { color: #3a7bd5; }
-  .section-finance .section-title { color: #2e8b57; }
-  .section-agro .section-title { color: #8b6914; }
-  .section-rh .section-title { color: #9b59b6; }
-  .section-leadership .section-title { color: #c0392b; }
+  .theme-agro .section-icon { background: #689f38; }
+  .theme-agro .section-title { color: #689f38; }
+  .theme-agro .section-line { background: #689f38; }
+  .theme-agro .card { border-top: 3px solid #689f38; }
+  .theme-agro .card h3 { color: #558b2f; }
+
+  .theme-rh .section-icon { background: #f4511e; }
+  .theme-rh .section-title { color: #f4511e; }
+  .theme-rh .section-line { background: #f4511e; }
+  .theme-rh .card { border-top: 3px solid #f4511e; }
+  .theme-rh .card h3 { color: #d84315; }
+
+  .theme-lid .section-icon { background: #6d4c81; }
+  .theme-lid .section-title { color: #6d4c81; }
+  .theme-lid .section-line { background: #6d4c81; }
+  .theme-lid .card { border-top: 3px solid #6d4c81; }
+  .theme-lid .card h3 { color: #5e3570; }
 
   /* FOOTER */
-  .footer { background: #111; color: #777; text-align: center; padding: 30px 20px; font-size: 12px; line-height: 1.8; }
-  .footer .brand { color: #c9a84c; font-weight: 700; font-size: 14px; letter-spacing: 1px; }
-  .footer a { color: #8899aa; text-decoration: none; }
+  .footer { background: #111; color: #8a9aa8; padding: 30px 0; text-align: center; font-size: 12px; line-height: 1.8; }
+  .footer .brand { color: #c9a84c; font-size: 14px; font-weight: bold; letter-spacing: 2px; margin-bottom: 6px; }
+  .footer a { color: #c9a84c; text-decoration: none; }
 
-  @media (max-width: 600px) {
-    .header h1 { font-size: 24px; }
-    .ticker-bar { font-size: 11px; gap: 10px; }
-    .card { padding: 18px; }
+  @media (max-width: 640px) {
+    .header h1 { font-size: 26px; }
+    .lead-section h2 { font-size: 22px; }
+    .ticker-content { flex-direction: column; align-items: center; gap: 6px; }
   }
 </style>
 </head>
@@ -85,236 +103,34 @@ Now I have all the data I need. Let me compile the HTML magazine.
 
 <!-- HEADER -->
 <header class="header">
-  <div class="header-label">Curadoria Executiva Diária</div>
-  <h1>Revista Executiva de Tecnologia</h1>
-  <div class="edition">Edição #117 — São Paulo, Brasil</div>
-  <div class="date">Segunda-feira, 27 de Abril de 2026</div>
+  <div class="container">
+    <div class="header-label">Curadoria Executiva Diária</div>
+    <h1>Revista Executiva de Tecnologia</h1>
+    <div class="edition">Terça-feira, 28 de Abril de 2026 · Edição #118 · São Paulo, Brasil</div>
+    <div class="tagline">Inteligência para quem lidera engenharia</div>
+  </div>
 </header>
 
-<!-- TICKER BAR -->
+<!-- TICKER FINANCEIRO -->
 <div class="ticker-bar">
-  <div class="ticker-item">
-    <span class="label">Ibovespa</span>
-    <span class="value">190.200 pts</span>
-    <span class="change-down">▼ 0,33%</span>
-  </div>
-  <span class="ticker-sep">|</span>
-  <div class="ticker-item">
-    <span class="label">USD/BRL</span>
-    <span class="value">R$ 4,97</span>
-    <span class="change-down">▼ 0,4%</span>
-  </div>
-  <span class="ticker-sep">|</span>
-  <div class="ticker-item">
-    <span class="label">Selic</span>
-    <span class="value">14,75%</span>
-    <span class="change-down">Copom 29/04</span>
-  </div>
-  <span class="ticker-sep">|</span>
-  <div class="ticker-item">
-    <span class="label">IPCA Focus</span>
-    <span class="value">4,86%</span>
-    <span class="change-up">▲ +0,06 p.p.</span>
-  </div>
-  <span class="ticker-sep">|</span>
-  <div class="ticker-item">
-    <span class="label">Brent</span>
-    <span class="value">US$ 106/bbl</span>
-    <span class="change-up">▲ 1%</span>
+  <div class="container">
+    <div class="ticker-content">
+      <span class="ticker-item"><span class="label">IBOV</span> <span class="value">187.500</span> <span class="change-down">▼ 1,1%</span></span>
+      <span class="ticker-sep">│</span>
+      <span class="ticker-item"><span class="label">USD/BRL</span> <span class="value">R$ 4,98</span> <span class="change-up">+0,1%</span></span>
+      <span class="ticker-sep">│</span>
+      <span class="ticker-item"><span class="label">Selic</span> <span class="value">14,75%</span> <span class="label">(Focus 13,0% a.a.)</span></span>
+      <span class="ticker-sep">│</span>
+      <span class="ticker-item"><span class="label">IPCA Focus</span> <span class="value change-down">4,86%</span></span>
+      <span class="ticker-sep">│</span>
+      <span class="ticker-item"><span class="label">Brent</span> <span class="value">US$ 108,50</span> <span class="change-up">▲ 2,0%+</span></span>
+    </div>
   </div>
 </div>
 
-<div class="container">
-
-  <!-- ===== SEÇÃO 1: INTELIGÊNCIA ARTIFICIAL ===== -->
-  <section class="section section-ai">
-    <div class="section-header">
-      <div class="section-icon color-ai">🤖</div>
-      <div>
-        <div class="section-title">Inteligência Artificial</div>
-        <div class="section-subtitle">IA & Tecnologia de Fronteira</div>
-      </div>
-    </div>
-
-    <!-- LEAD STORY -->
-    <div class="card lead-card">
-      <span class="tag">Destaque Principal</span>
-      <h3>OpenAI lança GPT-5.5: o modelo mais inteligente da empresa chega à API e acirra corrida com Anthropic</h3>
-      <p class="summary">
-        A OpenAI lançou o GPT-5.5, descrito como seu modelo mais inteligente e intuitivo até hoje. Disponível desde 24 de abril na API, o modelo excele em codificação agêntica, uso de computador, trabalho do conhecimento e pesquisa científica. Com janela de contexto de 1M de tokens, o GPT-5.5 compete diretamente com o Claude Mythos Preview da Anthropic, que tem capturado atenção de Wall Street. O ChatGPT já conta com mais de 900 milhões de usuários semanais ativos e 50 milhões de assinantes pagos.
-      </p>
-      <div class="impact">
-        <strong>🎯 Impacto para Líderes de Engenharia:</strong> Avalie imediatamente o GPT-5.5 para workflows de codificação e debugging. A cadência de lançamentos da OpenAI (sub-2 meses) exige que times de engenharia tenham pipelines de avaliação automatizados prontos para cada novo modelo. Atenção ao custo: $5/1M tokens de input é 2× o GPT-5.4 — modele o break-even antes de migrar produção.
-      </div>
-      <div class="source">Fonte: <a href="https://openai.com/index/introducing-gpt-5-5/" target="_blank">OpenAI — Introducing GPT-5.5</a> · <a href="https://fortune.com/2026/04/23/openai-releases-gpt-5-5/" target="_blank">Fortune</a></div>
-    </div>
-
-    <!-- Notícia 2 -->
-    <div class="card">
-      <h3>Anthropic lidera ranking de modelos de IA; corrida EUA-China atinge margens mínimas</h3>
-      <p class="summary">
-        Segundo análise do MIT Technology Review com dados da plataforma Arena, a Anthropic lidera o ranking de modelos de IA em março de 2026, seguida de perto por xAI, Google e OpenAI. Modelos chineses como DeepSeek e Alibaba ficam apenas modestamente atrás. Com margens tão finas entre os melhores modelos, a competição se desloca para custo, confiabilidade e utilidade no mundo real.
-      </p>
-      <div class="impact">
-        <strong>🎯 Impacto para Líderes de Engenharia:</strong> A paridade entre modelos significa que a vantagem competitiva não está mais na escolha do modelo, mas na qualidade da integração. Invista em arquiteturas multi-modelo e avaliação contínua. A queda radical nos custos de inferência (performance de fronteira agora acessível a fração de 2024) abre espaço para mais experimentação.
-      </div>
-      <div class="source">Fonte: <a href="https://www.technologyreview.com/2026/04/13/1135675/want-to-understand-the-current-state-of-ai-check-out-these-charts/" target="_blank">MIT Technology Review</a></div>
-    </div>
-
-    <!-- Notícia 3 -->
-    <div class="card">
-      <h3>PwC: 75% dos ganhos econômicos da IA são capturados por apenas 20% das empresas</h3>
-      <p class="summary">
-        O estudo AI Performance 2026 da PwC, baseado em pesquisa com 1.217 executivos seniores de 25 setores, revela que uma pequena elite de empresas está se distanciando radicalmente na geração de retornos financeiros reais com IA. A diferença principal: as líderes focam em crescimento, não apenas produtividade. O estudo analisou o impacto de 60 práticas de gestão e investimento em IA.
-      </p>
-      <div class="impact">
-        <strong>🎯 Impacto para Líderes de Engenharia:</strong> Não basta automatizar processos — é preciso reimaginar produtos e modelos de receita com IA. Líderes técnicos devem alinhar roadmaps de IA à estratégia de crescimento do negócio, não apenas a métricas de eficiência operacional. O "AI fitness index" da PwC pode servir como benchmark interno.
-      </div>
-      <div class="source">Fonte: <a href="https://www.pwc.com/gx/en/news-room/press-releases/2026/pwc-2026-ai-performance-study.html" target="_blank">PwC — 2026 AI Performance Study</a></div>
-    </div>
-  </section>
-
-  <!-- ===== SEÇÃO 2: MERCADO FINANCEIRO ===== -->
-  <section class="section section-finance">
-    <div class="section-header">
-      <div class="section-icon color-finance">📈</div>
-      <div>
-        <div class="section-title">Mercado Financeiro</div>
-        <div class="section-subtitle">Brasil & Cenário Global</div>
-      </div>
-    </div>
-
-    <!-- Notícia 4 -->
-    <div class="card">
-      <h3>Ibovespa recua aos 190 mil pontos em semana decisiva: Copom, Fed e Big Techs no radar</h3>
-      <p class="summary">
-        O Ibovespa abriu a semana em queda, recuando a 190,2 mil pontos, com o dólar comercial caindo a R$ 4,97 e juros futuros em alta. As tensões no Estreito de Ormuz — praticamente fechado há nove semanas — sustentam o petróleo Brent acima de US$ 106/barril. Na agenda da semana: decisão do Copom na quarta (expectativa de corte de 0,25 p.p. na Selic para 14,50%), além de Fed, BCE, BoJ e resultados de Microsoft, Alphabet, Amazon e Meta.
-      </p>
-      <div class="impact">
-        <strong>🎯 Impacto para Líderes de Engenharia:</strong> Ormuz fechado por 9 semanas cria o maior choque de oferta de energia já registrado segundo a AIE. Monitore impactos nos custos de infraestrutura cloud (energia) e nas projeções de CAPEX das Big Techs — os resultados desta semana definirão o ritmo de investimento em IA no próximo trimestre.
-      </div>
-      <div class="source">Fonte: <a href="https://www.infomoney.com.br/mercados/ibovespa-hoje-bolsa-de-valores-ao-vivo-27042026/" target="_blank">InfoMoney — Ibovespa Ao Vivo 27/04</a> · <a href="https://www.spacemoney.com.br/investimentos/acoes/ibovespa-hoje/ibovespa-hoje-bolsa-dolar-juros-segunda-27042026/" target="_blank">SpaceMoney</a></div>
-    </div>
-
-    <!-- Notícia 5 -->
-    <div class="card">
-      <h3>Boletim Focus: inflação sobe para 4,86% e mercado eleva Selic terminal para 13% em 2026</h3>
-      <p class="summary">
-        O Boletim Focus divulgado nesta segunda-feira pelo Banco Central revelou nova deterioração nas expectativas: o IPCA esperado para 2026 subiu de 4,80% para 4,86%, já fora da faixa de tolerância da meta (4,5%). A Selic terminal prevista para o ano foi mantida em 13%, enquanto a projeção para o dólar ao fim de 2026 recuou para R$ 5,25 e o PIB ficou em 1,85%. O endividamento das famílias bateu recorde de 49,9%.
-      </p>
-      <div class="impact">
-        <strong>🎯 Impacto para Líderes de Engenharia:</strong> Com inflação estourando o teto da meta e juros elevados por mais tempo, o custo de capital para startups e projetos de expansão permanece alto. Para equipes de engenharia: reforce business cases com ROI claro e payback curto. O cenário favorece consolidação — fique atento a oportunidades de M&A em agtechs e fintechs.
-      </div>
-      <div class="source">Fonte: <a href="https://www.moneytimes.com.br/tempo-real-ibovespa-hoje-mercado-ao-vivo-27-04-2026-jals-lils-apsa/" target="_blank">Money Times</a> · <a href="https://www.infomoney.com.br/mercados/ibovespa-hoje-bolsa-de-valores-ao-vivo-27042026/" target="_blank">InfoMoney</a></div>
-    </div>
-  </section>
-
-  <!-- ===== SEÇÃO 3: AGRONEGÓCIO & TI ===== -->
-  <section class="section section-agro">
-    <div class="section-header">
-      <div class="section-icon color-agro">🌾</div>
-      <div>
-        <div class="section-title">Agronegócio &amp; TI</div>
-        <div class="section-subtitle">Agricultura Digital & Inovação no Campo</div>
-      </div>
-    </div>
-
-    <!-- Notícia 6 -->
-    <div class="card">
-      <h3>Embrapa lança plataformas digitais e primeiro milho transgênico 100% brasileiro na Agrishow 2026</h3>
-      <p class="summary">
-        A Embrapa apresentou na Agrishow 2026 um conjunto de inovações que marca um novo patamar para a agricultura digital brasileira: a Plataforma Trigo no Brasil (12 painéis interativos com dados estratégicos), o BTMAX (primeiro milho transgênico 100% brasileiro, desenvolvido com a Helix), e o AgNest — farm lab em parceria com Banco do Brasil e Faesp/Senar. A unidade Embrapii ITECH-Agro integra nanotecnologia, fotônica, IoT e IA para o agro.
-      </p>
-      <div class="impact">
-        <strong>🎯 Impacto para Líderes de Engenharia:</strong> O AgNest como farm lab com governança público-privada (Embrapa + BB + Faesp) é modelo replicável para outras cadeias. Para CTOs do agro: a integração entre nanotecnologia, IoT e IA na agricultura de precisão exige arquiteturas edge-to-cloud robustas. Avalie parcerias com a Embrapii para P&D incentivada.
-      </div>
-      <div class="source">Fonte: <a href="https://www.embrapa.br/busca-de-noticias/-/noticia/115580721/embrapa-apresenta-inovacoes-em-sustentabilidade-bioeconomia-e-agricultura-digital-na-agrishow-2026" target="_blank">Embrapa — Portal</a></div>
-    </div>
-
-    <!-- Notícia 7 -->
-    <div class="card">
-      <h3>Agentes de IA chegam ao campo: mais de 1/3 das empresas do agro já usam IA para gerar receita</h3>
-      <p class="summary">
-        Pesquisas recentes com CEOs do agronegócio brasileiro revelam que mais de um terço das empresas do setor já utiliza IA para gerar receita ou reduzir custos — um dos índices mais altos entre todos os setores da economia. A nova fronteira são os agentes de IA autônomos, capazes de monitorar frotas e agendar manutenções preditivas. Já a pulverização inteligente com visão computacional demonstra reduções de 80-90% no uso de herbicidas em campos-teste.
-      </p>
-      <div class="impact">
-        <strong>🎯 Impacto para Líderes de Engenharia:</strong> O agro é uma das verticais com adoção mais acelerada de IA agêntica. Para times de engenharia que atendem o setor: a conectividade ainda é gargalo (2/3 da área agrícola sem 4G/5G). Soluções híbridas offline-first com sincronização inteligente são diferenciais técnicos críticos. Priorize arquiteturas que operem em ambientes de baixa conectividade.
-      </div>
-      <div class="source">Fonte: <a href="https://grupoferrante.com.br/tecnologia-no-agronegocio-o-que-realmente-vira-produtividade-no-campo-em-2026/" target="_blank">Grupo Ferrante — Tecnologia no Agronegócio 2026</a></div>
-    </div>
-  </section>
-
-  <!-- ===== SEÇÃO 4: GESTÃO DE PESSOAS & RH ===== -->
-  <section class="section section-rh">
-    <div class="section-header">
-      <div class="section-icon color-rh">👥</div>
-      <div>
-        <div class="section-title">Gestão de Pessoas &amp; RH</div>
-        <div class="section-subtitle">Futuro do Trabalho & Talentos</div>
-      </div>
-    </div>
-
-    <!-- Notícia 8 -->
-    <div class="card">
-      <h3>75% das empresas já usam IA no RH, mas 61% não monitoram métricas de impacto ou ética</h3>
-      <p class="summary">
-        Dados apresentados no evento Tendências de RH 2026 (Factorial/Edix) revelam que 75% das empresas afirmam usar IA no RH há ao menos seis meses, e 83% dos profissionais recorrem principalmente ao ChatGPT. No entanto, 61% das organizações não monitoram métricas de impacto, ética ou privacidade, e 46% ainda não possuem plano formal de implementação. Especialistas destacam que o RH precisa atuar como "intérprete entre a tecnologia e as pessoas".
-      </p>
-      <div class="impact">
-        <strong>🎯 Impacto para Líderes de Engenharia:</strong> A lacuna entre adoção e governança de IA no RH é alarmante — e é onde engenharia pode agregar enorme valor. Proponha frameworks internos de ética e compliance para IA em people analytics. A integração de LLMs com dados corporativos reais (não apenas chatbots generalistas) é a próxima onda de maturidade.
-      </div>
-      <div class="source">Fonte: <a href="https://startups.com.br/artigo/gestao-de-pessoas-em-2026-o-rh-como-interprete-entre-a-tecnologia-e-as-pessoas/" target="_blank">Startups.com.br</a> · <a href="https://factorialhr.com.br/gestao-de-pessoas-rh-e-tecnologia" target="_blank">Factorial HR</a></div>
-    </div>
-
-    <!-- Notícia 9 -->
-    <div class="card">
-      <h3>Gartner: IA pode gerar ganhos de 29% na produtividade do RH — mas exige redesenho da força de trabalho</h3>
-      <p class="summary">
-        A pesquisa anual do Gartner com 426 diretores de RH de 23 setores identifica quatro prioridades para 2026: IA transformando o modelo operacional de RH (com potencial de 29% de ganho de produtividade); redesenho da força de trabalho na era humano-máquina; mobilização de líderes para crescimento em incerteza; e integração de cultura organizacional para impulsionar desempenho. A transformação impulsionada por IA lidera a lista pelo segundo ano consecutivo.
-      </p>
-      <div class="impact">
-        <strong>🎯 Impacto para Líderes de Engenharia:</strong> O redesenho da força de trabalho na "era humano-máquina" afeta diretamente times de engenharia. Desenvolva taxonomias de skills baseadas em competências (não cargos), integre IA para identificar gaps e roteirizar desenvolvimento individual. O modelo skill-based de RH exige suporte técnico — posicione sua equipe como parceira estratégica.
-      </div>
-      <div class="source">Fonte: <a href="https://www.gartner.com.br/pt-br/recursos-humanos/tendencias/principais-prioridades-para-lideres-de-rh" target="_blank">Gartner — Prioridades de RH 2026</a></div>
-    </div>
-  </section>
-
-  <!-- ===== SEÇÃO 5: LIDERANÇA EXECUTIVA ===== -->
-  <section class="section section-leadership">
-    <div class="section-header">
-      <div class="section-icon color-leadership">🏛️</div>
-      <div>
-        <div class="section-title">Liderança Executiva</div>
-        <div class="section-subtitle">Estratégia, Governança & Visão de Negócio</div>
-      </div>
-    </div>
-
-    <!-- Notícia 10 -->
-    <div class="card">
-      <h3>Logicalis CIO Report 2026: IA deixou de ser tema tecnológico e tornou-se tema estrutural de liderança</h3>
-      <p class="summary">
-        O Global CIO Report 2026 da Logicalis, com visões de mais de mil CIOs globais, identifica uma inflexão definitiva: a IA passou da fase preparatória para influenciar decisões estratégicas, alterar modelos operacionais e redistribuir responsabilidade dentro das organizações. Mais da metade dos CIOs reconhece que a adoção avança rápido demais — não por falta de ambição, mas porque governança, competências e alinhamento estratégico não acompanham o ritmo. A transição de IA generativa para sistemas agênticos coloca questões urgentes de legitimidade e auditoria.
-      </p>
-      <div class="impact">
-        <strong>🎯 Impacto para Líderes de Engenharia:</strong> A pergunta não é mais "se" a IA vai transformar o negócio, mas "quem está preparado para governar essa transformação". Líderes técnicos devem assumir protagonismo em governance de IA — definindo frameworks de responsabilidade, rastreabilidade e auditoria para sistemas agênticos. Posicione-se como o elo entre velocidade de inovação e maturidade institucional.
-      </div>
-      <div class="source">Fonte: <a href="https://business-it.pt/2026/03/31/inteligencia-artificial-lideranca-sob-aceleracao/" target="_blank">Business-IT — Logicalis Global CIO Report 2026</a></div>
-    </div>
-  </section>
-
-</div>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="brand">Revista Executiva de Tecnologia</div>
-  <p>Curadoria diária para líderes de engenharia de software · São Paulo, Brasil</p>
-  <p>Segunda-feira, 27 de Abril de 2026 · Edição #117</p>
-  <p style="margin-top: 10px; font-size: 11px; color: #555;">
-    Todas as notícias são baseadas em fontes públicas verificadas. Os indicadores financeiros refletem dados disponíveis no momento da publicação.<br>
-    Ticker: Ibovespa ~190.200 pts · USD/BRL ~R$ 4,97 · Selic 14,75% (decisão Copom 29/04) · IPCA Focus 4,86% · Brent ~US$ 106/bbl
-  </p>
-  <p style="margin-top: 8px; font-size: 11px; color: #444;">© 2026 Revista Executiva de Tecnologia. Todos os direitos reservados.</p>
-</footer>
-
-</body>
-</html>
+<!-- LEAD STORY -->
+<section class="lead-section">
+  <div class="container">
+    <div class="lead-label">★ Destaque Principal — Inteligência Artificial</div>
+    <h2>OpenAI Lança GPT-5.5 e Acelera Corrida para o "Super App" de IA — API Disponível desde 24/04</h2>
+    <p class="lead-summary">
