@@ -1,4 +1,4 @@
-Now I have all the data needed. Let me compile the HTML newsletter:
+Now I have all the data I need. Let me compile the HTML magazine.
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -8,129 +8,132 @@ Now I have all the data needed. Let me compile the HTML newsletter:
 <title>Revista Executiva de Tecnologia — 28 de Abril de 2026</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #f5f0e8; font-family: Georgia, 'Times New Roman', serif; color: #2c2c2c; line-height: 1.7; }
-  .container { max-width: 920px; margin: 0 auto; padding: 0 20px; }
-
+  body { background: #f5f0e8; font-family: Georgia, 'Times New Roman', serif; color: #2e3f52; line-height: 1.6; }
+  
   /* HEADER */
-  .header { background: #2e3f52; color: #f5f0e8; padding: 40px 0 30px; text-align: center; border-bottom: 4px solid #c9a84c; }
-  .header-label { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: #c9a84c; margin-bottom: 6px; }
-  .header h1 { font-size: 38px; font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
-  .header .edition { font-size: 14px; color: #b0bec5; font-style: italic; }
-  .header .tagline { font-size: 12px; color: #8a9aa8; margin-top: 8px; letter-spacing: 2px; text-transform: uppercase; }
-
-  /* TICKER */
-  .ticker-bar { background: #111; color: #c9a84c; padding: 12px 0; font-size: 13px; letter-spacing: 0.5px; overflow: hidden; border-bottom: 2px solid #c9a84c; }
-  .ticker-content { display: flex; justify-content: center; flex-wrap: wrap; gap: 18px; }
-  .ticker-item { display: inline-block; white-space: nowrap; }
-  .ticker-item .label { color: #8a9aa8; margin-right: 4px; }
-  .ticker-item .value { color: #f5f0e8; font-weight: bold; }
-  .ticker-item .change-down { color: #ef5350; }
-  .ticker-item .change-up { color: #66bb6a; }
-  .ticker-sep { color: #444; }
-
+  .header { background: #2e3f52; color: #f5f0e8; padding: 32px 24px 18px; text-align: center; border-bottom: 4px solid #c9a96e; }
+  .header-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #c9a96e; margin-bottom: 4px; }
+  .header h1 { font-size: 36px; font-weight: 700; letter-spacing: 1px; margin-bottom: 2px; }
+  .header .edition { font-size: 13px; color: #a0b0c0; font-style: italic; margin-top: 6px; }
+  .header .tagline { font-size: 12px; color: #c9a96e; margin-top: 4px; letter-spacing: 2px; text-transform: uppercase; }
+  
+  /* TICKER BAR */
+  .ticker-bar { background: #111; color: #e0d8c8; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; padding: 12px 20px; font-family: 'Courier New', monospace; font-size: 13px; border-bottom: 2px solid #c9a96e; }
+  .ticker-item { display: inline-flex; align-items: center; gap: 5px; }
+  .ticker-label { color: #c9a96e; font-weight: bold; }
+  .ticker-value { color: #fff; }
+  .ticker-down { color: #e74c3c; }
+  .ticker-up { color: #2ecc71; }
+  .ticker-neutral { color: #f1c40f; }
+  
+  /* CONTAINER */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+  
   /* LEAD STORY */
-  .lead-section { background: #2e3f52; padding: 40px 0 36px; border-bottom: 3px solid #c9a84c; }
-  .lead-section .lead-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #c9a84c; margin-bottom: 10px; }
-  .lead-section h2 { font-size: 28px; color: #fff; margin-bottom: 14px; line-height: 1.35; }
-  .lead-section .lead-summary { font-size: 16px; color: #cfd8dc; line-height: 1.8; margin-bottom: 14px; }
-  .lead-section .lead-impact { background: rgba(201,168,76,0.12); border-left: 3px solid #c9a84c; padding: 12px 16px; color: #e0d6c2; font-size: 14px; margin-bottom: 14px; border-radius: 0 4px 4px 0; }
-  .lead-section .lead-impact strong { color: #c9a84c; }
-  .lead-section .source-link { font-size: 12px; color: #8a9aa8; }
-  .lead-section .source-link a { color: #c9a84c; text-decoration: none; }
-  .lead-section .source-link a:hover { text-decoration: underline; }
-
+  .lead-story { background: #2e3f52; color: #f5f0e8; border-radius: 8px; padding: 32px 28px; margin: 28px auto; max-width: 900px; position: relative; overflow: hidden; }
+  .lead-story::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: #c9a96e; }
+  .lead-badge { display: inline-block; background: #c9a96e; color: #2e3f52; font-size: 10px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; border-radius: 3px; margin-bottom: 14px; }
+  .lead-story h2 { font-size: 26px; line-height: 1.3; margin-bottom: 14px; color: #fff; }
+  .lead-story .lead-summary { font-size: 15px; line-height: 1.7; color: #c8d6e0; margin-bottom: 14px; }
+  .lead-story .lead-impact { font-size: 13px; background: rgba(201,169,110,0.15); border-left: 3px solid #c9a96e; padding: 10px 14px; border-radius: 0 4px 4px 0; color: #e0d8c8; }
+  .lead-story .lead-impact strong { color: #c9a96e; }
+  .lead-source { font-size: 11px; color: #8899aa; margin-top: 12px; }
+  .lead-source a { color: #c9a96e; text-decoration: none; }
+  .lead-source a:hover { text-decoration: underline; }
+  
   /* SECTIONS */
-  .section { padding: 36px 0 20px; border-bottom: 1px solid #ddd3c2; }
-  .section-header { display: flex; align-items: center; margin-bottom: 24px; gap: 12px; }
-  .section-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #fff; flex-shrink: 0; }
-  .section-title { font-size: 20px; font-weight: 700; letter-spacing: 1px; }
-  .section-line { flex: 1; height: 1px; }
+  .section { margin: 32px auto; max-width: 900px; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; border-bottom: 2px solid; padding-bottom: 8px; }
+  .section-icon { font-size: 22px; }
+  .section-title { font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+  .section-subtitle { font-size: 11px; color: #888; letter-spacing: 2px; text-transform: uppercase; margin-left: auto; }
 
+  /* COLOR PER SECTION */
+  .sec-ia .section-header { border-color: #3498db; color: #2980b9; }
+  .sec-fin .section-header { border-color: #27ae60; color: #219653; }
+  .sec-agro .section-header { border-color: #e67e22; color: #d35400; }
+  .sec-rh .section-header { border-color: #8e44ad; color: #7d3c98; }
+  .sec-lid .section-header { border-color: #c0392b; color: #a93226; }
+  
   /* CARDS */
-  .card { background: #fff; border: 1px solid #e0d6c2; border-radius: 6px; padding: 22px 24px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
-  .card h3 { font-size: 18px; margin-bottom: 10px; line-height: 1.4; }
-  .card .summary { font-size: 14px; color: #444; margin-bottom: 12px; }
-  .card .impact { background: #faf6ee; border-left: 3px solid #c9a84c; padding: 10px 14px; font-size: 13px; color: #5a5040; margin-bottom: 10px; border-radius: 0 4px 4px 0; }
-  .card .impact strong { color: #8b7230; }
-  .card .meta { font-size: 11px; color: #999; }
-  .card .meta a { color: #6a8caf; text-decoration: none; }
-  .card .meta a:hover { text-decoration: underline; }
-
-  /* COLOR THEMES */
-  .theme-ia .section-icon { background: #5c6bc0; }
-  .theme-ia .section-title { color: #5c6bc0; }
-  .theme-ia .section-line { background: #5c6bc0; }
-  .theme-ia .card { border-top: 3px solid #5c6bc0; }
-  .theme-ia .card h3 { color: #3949ab; }
-
-  .theme-fin .section-icon { background: #00897b; }
-  .theme-fin .section-title { color: #00897b; }
-  .theme-fin .section-line { background: #00897b; }
-  .theme-fin .card { border-top: 3px solid #00897b; }
-  .theme-fin .card h3 { color: #00695c; }
-
-  .theme-agro .section-icon { background: #689f38; }
-  .theme-agro .section-title { color: #689f38; }
-  .theme-agro .section-line { background: #689f38; }
-  .theme-agro .card { border-top: 3px solid #689f38; }
-  .theme-agro .card h3 { color: #558b2f; }
-
-  .theme-rh .section-icon { background: #f4511e; }
-  .theme-rh .section-title { color: #f4511e; }
-  .theme-rh .section-line { background: #f4511e; }
-  .theme-rh .card { border-top: 3px solid #f4511e; }
-  .theme-rh .card h3 { color: #d84315; }
-
-  .theme-lid .section-icon { background: #6d4c81; }
-  .theme-lid .section-title { color: #6d4c81; }
-  .theme-lid .section-line { background: #6d4c81; }
-  .theme-lid .card { border-top: 3px solid #6d4c81; }
-  .theme-lid .card h3 { color: #5e3570; }
-
+  .card { background: #fff; border: 1px solid #e0d8c8; border-radius: 6px; padding: 22px 24px; margin-bottom: 16px; transition: box-shadow .2s; }
+  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .card h3 { font-size: 17px; line-height: 1.35; margin-bottom: 10px; color: #2e3f52; }
+  .card .summary { font-size: 14px; color: #444; line-height: 1.65; margin-bottom: 10px; }
+  .card .impact { font-size: 12.5px; background: #f9f6f0; border-left: 3px solid #c9a96e; padding: 8px 12px; border-radius: 0 4px 4px 0; color: #555; margin-bottom: 8px; }
+  .card .impact strong { color: #2e3f52; }
+  .card .source { font-size: 11px; color: #999; }
+  .card .source a { color: #3498db; text-decoration: none; }
+  .card .source a:hover { text-decoration: underline; }
+  
+  /* ACCENT BARS FOR CARDS */
+  .sec-ia .card { border-left: 4px solid #3498db; }
+  .sec-fin .card { border-left: 4px solid #27ae60; }
+  .sec-agro .card { border-left: 4px solid #e67e22; }
+  .sec-rh .card { border-left: 4px solid #8e44ad; }
+  .sec-lid .card { border-left: 4px solid #c0392b; }
+  
   /* FOOTER */
-  .footer { background: #111; color: #8a9aa8; padding: 30px 0; text-align: center; font-size: 12px; line-height: 1.8; }
-  .footer .brand { color: #c9a84c; font-size: 14px; font-weight: bold; letter-spacing: 2px; margin-bottom: 6px; }
-  .footer a { color: #c9a84c; text-decoration: none; }
+  .footer { background: #111; color: #888; text-align: center; padding: 28px 20px; margin-top: 40px; font-size: 12px; line-height: 1.7; }
+  .footer .footer-brand { color: #c9a96e; font-size: 14px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .footer a { color: #c9a96e; text-decoration: none; }
 
   @media (max-width: 640px) {
-    .header h1 { font-size: 26px; }
-    .lead-section h2 { font-size: 22px; }
-    .ticker-content { flex-direction: column; align-items: center; gap: 6px; }
+    .header h1 { font-size: 24px; }
+    .lead-story h2 { font-size: 20px; }
+    .lead-story { padding: 22px 18px; }
+    .card { padding: 16px 14px; }
+    .ticker-bar { font-size: 11px; gap: 10px; }
   }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
+<!-- ===== HEADER ===== -->
 <header class="header">
-  <div class="container">
-    <div class="header-label">Curadoria Executiva Diária</div>
-    <h1>Revista Executiva de Tecnologia</h1>
-    <div class="edition">Terça-feira, 28 de Abril de 2026 · Edição #118 · São Paulo, Brasil</div>
-    <div class="tagline">Inteligência para quem lidera engenharia</div>
-  </div>
+  <div class="header-label">Curadoria Executiva Diária</div>
+  <h1>Revista Executiva de Tecnologia</h1>
+  <div class="tagline">Inteligência para quem lidera engenharia de software</div>
+  <div class="edition">Terça-feira, 28 de Abril de 2026 · São Paulo, Brasil · Edição #117</div>
 </header>
 
-<!-- TICKER FINANCEIRO -->
+<!-- ===== TICKER BAR ===== -->
 <div class="ticker-bar">
-  <div class="container">
-    <div class="ticker-content">
-      <span class="ticker-item"><span class="label">IBOV</span> <span class="value">187.500</span> <span class="change-down">▼ 1,1%</span></span>
-      <span class="ticker-sep">│</span>
-      <span class="ticker-item"><span class="label">USD/BRL</span> <span class="value">R$ 4,98</span> <span class="change-up">+0,1%</span></span>
-      <span class="ticker-sep">│</span>
-      <span class="ticker-item"><span class="label">Selic</span> <span class="value">14,75%</span> <span class="label">(Focus 13,0% a.a.)</span></span>
-      <span class="ticker-sep">│</span>
-      <span class="ticker-item"><span class="label">IPCA Focus</span> <span class="value change-down">4,86%</span></span>
-      <span class="ticker-sep">│</span>
-      <span class="ticker-item"><span class="label">Brent</span> <span class="value">US$ 108,50</span> <span class="change-up">▲ 2,0%+</span></span>
-    </div>
-  </div>
+  <span class="ticker-item">
+    <span class="ticker-label">IBOV</span>
+    <span class="ticker-value">188.618</span>
+    <span class="ticker-down">▼ −0,51%</span>
+  </span>
+  <span class="ticker-item">
+    <span class="ticker-label">USD/BRL</span>
+    <span class="ticker-value">R$ 4,98</span>
+    <span class="ticker-up">estável</span>
+  </span>
+  <span class="ticker-item">
+    <span class="ticker-label">SELIC</span>
+    <span class="ticker-value">14,75% a.a.</span>
+    <span class="ticker-neutral">Copom decide amanhã</span>
+  </span>
+  <span class="ticker-item">
+    <span class="ticker-label">IPCA-15 Abr</span>
+    <span class="ticker-value">+0,89%</span>
+    <span class="ticker-down">▲ acelerando</span>
+  </span>
+  <span class="ticker-item">
+    <span class="ticker-label">Focus IPCA 2026</span>
+    <span class="ticker-value">4,86%</span>
+    <span class="ticker-down">7ª alta consecutiva</span>
+  </span>
+  <span class="ticker-item">
+    <span class="ticker-label">BRENT</span>
+    <span class="ticker-value">US$ 111,17</span>
+    <span class="ticker-down">▲ tensão Ormuz</span>
+  </span>
 </div>
 
-<!-- LEAD STORY -->
-<section class="lead-section">
-  <div class="container">
-    <div class="lead-label">★ Destaque Principal — Inteligência Artificial</div>
-    <h2>OpenAI Lança GPT-5.5 e Acelera Corrida para o "Super App" de IA — API Disponível desde 24/04</h2>
-    <p class="lead-summary">
+<!-- ===== LEAD STORY ===== -->
+<div class="container">
+<article class="lead-story">
+  <span class="lead-badge">★ Destaque do Dia</span>
+  <h2>OpenAI lança GPT-5.5 e acelera rumo ao "Super App" de IA unificado</h2>
+  <p class="lead-summary">
