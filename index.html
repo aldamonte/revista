@@ -1,328 +1,386 @@
-Now I have all the data I need. Let me compile the HTML magazine.
+Now I have all the data needed to create the newsletter. Let me compile it:
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revista Executiva de Tecnologia — 12 de Maio de 2026</title>
+<title>Revista Executiva de Tecnologia — 13 de Maio de 2026</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #f5f0e8; font-family: Georgia, 'Times New Roman', serif; color: #2c2c2c; line-height: 1.6; }
+  body { background: #f5f0e8; font-family: Georgia, 'Times New Roman', serif; color: #2e2e2e; line-height: 1.7; }
   
   /* HEADER */
-  .header { background: #2e3f52; color: #f5f0e8; padding: 32px 24px 20px; text-align: center; border-bottom: 4px solid #c9a84c; }
-  .header-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #c9a84c; margin-bottom: 4px; }
-  .header h1 { font-size: 32px; font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
-  .header .edition { font-size: 13px; color: #a0b0c0; font-style: italic; }
-  .header .tagline { font-size: 12px; color: #c9a84c; margin-top: 8px; letter-spacing: 2px; text-transform: uppercase; }
-
+  .header {
+    background: #2e3f52;
+    color: #f5f0e8;
+    padding: 40px 24px 32px;
+    text-align: center;
+    border-bottom: 4px solid #c9a84c;
+  }
+  .header-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .header .edition {
+    font-size: 14px;
+    font-style: italic;
+    color: #a8b8c8;
+  }
+  .header .subtitle {
+    font-size: 13px;
+    color: #8899aa;
+    margin-top: 4px;
+  }
+  
   /* TICKER BAR */
-  .ticker-bar { background: #111; color: #e8e0d0; padding: 12px 24px; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; font-size: 13px; font-family: 'Courier New', monospace; border-bottom: 2px solid #c9a84c; }
-  .ticker-item { display: inline-flex; align-items: center; gap: 6px; }
-  .ticker-item .label { color: #c9a84c; font-weight: bold; }
-  .ticker-item .value { color: #fff; }
-  .ticker-item .change-down { color: #ff6b6b; }
-  .ticker-item .change-up { color: #69db7c; }
-  .ticker-sep { color: #555; }
-
+  .ticker-bar {
+    background: #111;
+    color: #c9a84c;
+    padding: 12px 24px;
+    font-size: 13px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+    letter-spacing: 0.5px;
+    font-family: 'Courier New', monospace;
+  }
+  .ticker-item { white-space: nowrap; }
+  .ticker-item .val { color: #f5f0e8; font-weight: bold; }
+  .ticker-item .down { color: #e74c3c; }
+  .ticker-item .up { color: #27ae60; }
+  .ticker-item .neutral { color: #f5f0e8; }
+  
   /* CONTAINER */
-  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
-
-  /* SECTION */
-  .section { margin-bottom: 36px; }
-  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; border-bottom: 2px solid; padding-bottom: 8px; }
-  .section-number { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; font-weight: bold; }
-  .section-title { font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-  .section-subtitle { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #888; margin-top: 2px; }
-
-  /* Colors per section */
-  .sec-ia .section-header { border-color: #4a6fa5; }
-  .sec-ia .section-number { background: #4a6fa5; }
-  .sec-ia .section-title { color: #4a6fa5; }
-  .sec-ia .card { border-left: 4px solid #4a6fa5; }
-
-  .sec-fin .section-header { border-color: #2d6a4f; }
-  .sec-fin .section-number { background: #2d6a4f; }
-  .sec-fin .section-title { color: #2d6a4f; }
-  .sec-fin .card { border-left: 4px solid #2d6a4f; }
-
-  .sec-agro .section-header { border-color: #b07d2e; }
-  .sec-agro .section-number { background: #b07d2e; }
-  .sec-agro .section-title { color: #b07d2e; }
-  .sec-agro .card { border-left: 4px solid #b07d2e; }
-
-  .sec-rh .section-header { border-color: #7b2d8e; }
-  .sec-rh .section-number { background: #7b2d8e; }
-  .sec-rh .section-title { color: #7b2d8e; }
-  .sec-rh .card { border-left: 4px solid #7b2d8e; }
-
-  .sec-lid .section-header { border-color: #c0392b; }
-  .sec-lid .section-number { background: #c0392b; }
-  .sec-lid .section-title { color: #c0392b; }
-  .sec-lid .card { border-left: 4px solid #c0392b; }
-
+  .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  
   /* LEAD STORY */
-  .lead-story { background: #2e3f52; color: #f5f0e8; border-radius: 8px; padding: 28px 24px; margin-bottom: 36px; border: 1px solid #3d5068; }
-  .lead-story .lead-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #c9a84c; margin-bottom: 8px; display: inline-block; border: 1px solid #c9a84c; padding: 2px 10px; border-radius: 3px; }
-  .lead-story h2 { font-size: 26px; line-height: 1.3; margin-bottom: 14px; color: #fff; }
-  .lead-story p { font-size: 15px; line-height: 1.7; color: #c8d6e5; margin-bottom: 12px; }
-  .lead-story .impact { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); border-radius: 5px; padding: 12px 16px; margin-top: 12px; }
-  .lead-story .impact-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #c9a84c; font-weight: bold; margin-bottom: 4px; }
-  .lead-story .impact p { color: #e0d5c0; font-size: 13px; margin-bottom: 0; }
-  .lead-story .source-link { color: #c9a84c; font-size: 12px; text-decoration: none; }
-  .lead-story .source-link:hover { text-decoration: underline; }
-
-  /* CARD */
-  .card { background: #fff; border-radius: 6px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-  .card h3 { font-size: 17px; line-height: 1.35; margin-bottom: 10px; color: #1a1a2e; }
-  .card .summary { font-size: 14px; line-height: 1.65; color: #444; margin-bottom: 10px; }
-  .card .impact { background: #f9f6f0; border: 1px solid #e8e0d0; border-radius: 4px; padding: 10px 14px; margin-top: 10px; }
-  .card .impact-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; margin-bottom: 3px; }
-  .sec-ia .card .impact-label { color: #4a6fa5; }
-  .sec-fin .card .impact-label { color: #2d6a4f; }
-  .sec-agro .card .impact-label { color: #b07d2e; }
-  .sec-rh .card .impact-label { color: #7b2d8e; }
-  .sec-lid .card .impact-label { color: #c0392b; }
-  .card .impact p { font-size: 13px; color: #555; line-height: 1.5; margin: 0; }
-  .card .source-link { display: inline-block; margin-top: 8px; font-size: 12px; color: #4a6fa5; text-decoration: none; }
-  .card .source-link:hover { text-decoration: underline; }
-
+  .lead-story {
+    background: #2e3f52;
+    color: #f5f0e8;
+    border-radius: 8px;
+    padding: 36px 32px;
+    margin: 32px 0 24px;
+  }
+  .lead-story .lead-tag {
+    display: inline-block;
+    background: #c9a84c;
+    color: #2e3f52;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 3px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .lead-story h2 { font-size: 26px; line-height: 1.3; margin-bottom: 14px; }
+  .lead-story p { font-size: 15px; line-height: 1.8; color: #c8d6e5; margin-bottom: 12px; }
+  .lead-story .impact {
+    border-left: 3px solid #c9a84c;
+    padding-left: 16px;
+    margin-top: 16px;
+    font-size: 14px;
+    font-style: italic;
+    color: #a8c0d8;
+  }
+  .lead-story a { color: #c9a84c; text-decoration: underline; font-size: 13px; }
+  
+  /* SECTIONS */
+  .section { margin: 36px 0; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid;
+    padding-bottom: 10px;
+  }
+  .section-icon { font-size: 24px; }
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  
+  /* SECTION COLORS */
+  .sec-ia .section-header { border-color: #5b6abf; }
+  .sec-ia .section-title { color: #5b6abf; }
+  .sec-ia .card { border-left: 4px solid #5b6abf; }
+  
+  .sec-fin .section-header { border-color: #2e7d32; }
+  .sec-fin .section-title { color: #2e7d32; }
+  .sec-fin .card { border-left: 4px solid #2e7d32; }
+  
+  .sec-agro .section-header { border-color: #c17900; }
+  .sec-agro .section-title { color: #c17900; }
+  .sec-agro .card { border-left: 4px solid #c17900; }
+  
+  .sec-rh .section-header { border-color: #b5179e; }
+  .sec-rh .section-title { color: #b5179e; }
+  .sec-rh .card { border-left: 4px solid #b5179e; }
+  
+  .sec-lid .section-header { border-color: #c9a84c; }
+  .sec-lid .section-title { color: #9a7b2e; }
+  .sec-lid .card { border-left: 4px solid #c9a84c; }
+  
+  /* CARDS */
+  .card {
+    background: #fff;
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin-bottom: 18px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .card h3 { font-size: 18px; line-height: 1.4; margin-bottom: 10px; color: #1a1a1a; }
+  .card p { font-size: 14px; line-height: 1.8; color: #3e3e3e; margin-bottom: 10px; }
+  .card .impact-box {
+    background: #f5f0e8;
+    border-radius: 4px;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-style: italic;
+    color: #555;
+    margin-top: 8px;
+  }
+  .card .impact-box strong { color: #2e3f52; font-style: normal; }
+  .card .source { font-size: 12px; color: #888; margin-top: 8px; }
+  .card .source a { color: #5b6abf; text-decoration: none; }
+  .card .source a:hover { text-decoration: underline; }
+  
   /* FOOTER */
-  .footer { background: #111; color: #888; padding: 28px 24px; text-align: center; font-size: 12px; border-top: 3px solid #c9a84c; }
-  .footer .logo { color: #c9a84c; font-size: 15px; font-weight: bold; letter-spacing: 2px; margin-bottom: 6px; }
-  .footer p { margin-bottom: 4px; }
-  .footer a { color: #c9a84c; text-decoration: none; }
-
+  .footer {
+    background: #111;
+    color: #888;
+    text-align: center;
+    padding: 32px 24px;
+    margin-top: 48px;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  .footer .logo-text { color: #c9a84c; font-size: 16px; font-weight: 700; letter-spacing: 2px; }
+  .footer p { margin-top: 6px; }
+  
   @media (max-width: 600px) {
-    .header h1 { font-size: 22px; }
+    .header h1 { font-size: 24px; }
+    .lead-story { padding: 24px 18px; }
     .lead-story h2 { font-size: 20px; }
+    .card { padding: 18px 16px; }
     .ticker-bar { font-size: 11px; gap: 10px; }
-    .container { padding: 16px 10px; }
   }
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
-<header class="header">
+<div class="header">
   <div class="header-label">Curadoria Executiva Diária</div>
   <h1>Revista Executiva de Tecnologia</h1>
-  <div class="edition">Terça-feira, 12 de Maio de 2026 · Edição #296 · São Paulo, Brasil</div>
-  <div class="tagline">IA · Mercados · Agro Digital · Pessoas · Liderança</div>
-</header>
+  <div class="edition">Quarta-feira, 13 de Maio de 2026 · Edição #132</div>
+  <div class="subtitle">10 notícias estratégicas para líderes de engenharia · São Paulo, Brasil</div>
+</div>
 
 <!-- TICKER BAR -->
 <div class="ticker-bar">
-  <span class="ticker-item"><span class="label">IBOV</span> <span class="value">180.300</span> <span class="change-down">▼ em queda</span></span>
-  <span class="ticker-sep">|</span>
-  <span class="ticker-item"><span class="label">USD/BRL</span> <span class="value">R$ 4,89</span> <span class="change-up">▲ +0,2%</span></span>
-  <span class="ticker-sep">|</span>
-  <span class="ticker-item"><span class="label">SELIC</span> <span class="value">14,50%</span> <span class="label" style="font-size:10px;">Focus 2026:</span> <span class="value">13,00%</span></span>
-  <span class="ticker-sep">|</span>
-  <span class="ticker-item"><span class="label">IPCA Abr</span> <span class="value">0,67%</span> <span class="label" style="font-size:10px;">12m:</span> <span class="value">4,39%</span></span>
-  <span class="ticker-sep">|</span>
-  <span class="ticker-item"><span class="label">Focus IPCA 2026</span> <span class="value">4,91%</span> <span class="change-down">▲ 9ª alta</span></span>
-  <span class="ticker-sep">|</span>
-  <span class="ticker-item"><span class="label">PETRÓLEO</span> <span class="value">≈US$ 105/bbl</span> <span class="change-up">▲</span></span>
+  <div class="ticker-item">📊 Ibovespa <span class="val down">180.073 ▼0,15%</span></div>
+  <div class="ticker-item">💵 USD/BRL <span class="val up">R$ 4,9125 ▲0,36%</span></div>
+  <div class="ticker-item">📈 Selic <span class="val neutral">14,50% a.a.</span></div>
+  <div class="ticker-item">🎯 Focus IPCA 2026 <span class="val up">4,91% ▲</span></div>
+  <div class="ticker-item">🛢️ Brent <span class="val neutral">US$ 105,33</span></div>
+  <div class="ticker-item">⚡ Selic Focus 2026 <span class="val neutral">13,00%</span></div>
 </div>
 
 <div class="container">
 
-<!-- ============================================================ -->
 <!-- LEAD STORY -->
-<!-- ============================================================ -->
 <div class="lead-story">
-  <span class="lead-label">⚡ Destaque do Dia</span>
-  <h2>IPCA de Abril Desacelera para 0,67%, mas Acumulado em 12 Meses Escala a 4,39% e Pressiona o Teto da Meta</h2>
-  <p>O IBGE divulgou nesta terça-feira (12) o IPCA de abril de 2026 com variação de 0,67%, abaixo dos 0,88% de março e da mediana de mercado de 0,70%. Apesar do alívio mensal, puxado pela queda de 14,45% nas passagens aéreas e desaceleração da gasolina, a inflação acumulada em 12 meses saltou para 4,39% — perigosamente próxima do teto de 4,5% da meta contínua do Banco Central. Alimentos e bebidas (+1,34%) e saúde (+1,16%) responderam por dois terços do resultado.</p>
-  <p>O Boletim Focus da véspera já havia elevado a projeção do IPCA para 4,91% em 2026 — nona semana consecutiva de alta — e mantido a Selic esperada em 13,00%, com revisão de 2027 para 11,25%. A XP projeta Selic terminal em 13,75% e IPCA de 5,3%.</p>
+  <span class="lead-tag">★ Destaque Principal</span>
+  <h2>Onda Massiva de Layoffs Reestrutura Big Tech em Torno da IA: 128 Mil Demitidos em 2026</h2>
+  <p>
+    O setor de tecnologia global atravessa a maior reestruturação em uma década. Cloudflare cortou 1.100 posições (20% da força de trabalho) após o uso interno de IA crescer 600% em três meses. PayPal planeja eliminar 4.760 empregos (20%), Upwork cortou 25% do time, e Meta prepara demissão de 8.000 pessoas em 20 de maio. No total, 128 mil pessoas foram impactadas por 286 eventos de layoff em 2026 — média de 1.002 por dia — enquanto as mesmas empresas investem centenas de bilhões em infraestrutura de IA.
+  </p>
   <div class="impact">
-    <div class="impact-label">🎯 Impacto Estratégico para Líderes de Engenharia</div>
-    <p>Inflação persistente e juros altos encarecem captação, impactam budget de headcount e pressionam por mais automação e eficiência operacional via IA. Líderes de engenharia devem recalibrar ROI de investimentos tech assumindo custo de capital elevado por mais tempo.</p>
+    <strong>Impacto para líderes de engenharia:</strong> O padrão é inequívoco — empresas estão realocando capital humano para financiar IA. Líderes de engenharia devem preparar seus times com upskilling em IA agêntica e multi-cloud, e redesenhar estruturas organizacionais para equipes menores e AI-augmented. A vantagem competitiva será de quem dominar a orquestração humano-máquina.
   </div>
-  <a class="source-link" href="https://www.infomoney.com.br/economia/ipca-abril-2026-inflacao-acumulada-teto-meta/" target="_blank">📰 Fonte: InfoMoney — IPCA Abril 2026</a> &nbsp;|&nbsp;
-  <a class="source-link" href="https://www.cnnbrasil.com.br/economia/macroeconomia/infacao-ipca-12-abril-2026/" target="_blank">📰 CNN Brasil</a>
+  <a href="https://finance.yahoo.com/sectors/technology/articles/layoffs-accelerate-may-2026-firms-040430218.html" target="_blank">Fonte: Yahoo Finance / BeInCrypto →</a>
 </div>
 
-<!-- ============================================================ -->
 <!-- SEÇÃO 1: INTELIGÊNCIA ARTIFICIAL -->
-<!-- ============================================================ -->
 <div class="section sec-ia">
   <div class="section-header">
-    <div class="section-number">1</div>
-    <div>
-      <div class="section-title">Inteligência Artificial</div>
-      <div class="section-subtitle">Tendências, investimentos e segurança em IA</div>
-    </div>
+    <span class="section-icon">🤖</span>
+    <span class="section-title">Inteligência Artificial</span>
   </div>
-
-  <!-- Notícia 1 -->
+  
   <div class="card">
-    <h3>Cerebras Eleva Faixa de IPO para US$ 150–160 por Ação com Demanda 20x: Maior IPO de IA do Ano</h3>
-    <div class="summary">
-      A fabricante de chips de IA Cerebras Systems aumentou drasticamente a faixa de preço do seu IPO para US$ 150 a US$ 160 por ação, ante os US$ 115–125 iniciais. Com demanda superior a 20 vezes a oferta, o IPO pode levantar até US$ 4,8 bilhões, precificando a empresa em cerca de US$ 49 bilhões. A listagem no Nasdaq está prevista para 14 de maio, tornando-se o maior IPO global de 2026. A Cerebras tem como clientes a OpenAI e a AWS, com um contrato de US$ 10 bilhões com a OpenAI.
+    <h3>Microsoft e OpenAI Rompem Exclusividade: Nova Era Multi-Cloud Redefine Mercado de IA</h3>
+    <p>
+      A Microsoft e a OpenAI anunciaram uma reestruturação fundamental de sua parceria: a OpenAI agora pode servir seus produtos em qualquer provedor de nuvem, encerrando o modelo de exclusividade Azure. A Microsoft mantém participação de US$ 135 bilhões (~27%) e licença não-exclusiva à propriedade intelectual da OpenAI até 2032. Os pagamentos de revenue share da OpenAI para a Microsoft continuam até 2030, com teto definido. A cláusula de AGI foi eliminada.
+    </p>
+    <div class="impact-box">
+      <strong>🎯 Impacto estratégico:</strong> Para equipes de engenharia, isso significa que a escolha de provedor cloud deixa de ser atrelada ao acesso aos modelos OpenAI. Arquitetos devem repensar estratégias multi-cloud, avaliar Azure Foundry vs. AWS Bedrock e considerar redundância de provedores de IA como prática de resiliência.
     </div>
-    <div class="impact">
-      <div class="impact-label">🎯 Impacto Estratégico</div>
-      <p>O IPO da Cerebras sinaliza o amadurecimento do mercado de hardware especializado em inferência de IA, desafiando a hegemonia Nvidia. CTOs devem monitorar a diversificação de fornecedores de compute para reduzir lock-in e otimizar custo de inferência.</p>
-    </div>
-    <a class="source-link" href="https://www.cnbc.com/2026/05/11/cerebras-raises-ipo-range.html" target="_blank">📰 Fonte: CNBC</a>
+    <div class="source">Fonte: <a href="https://openai.com/index/next-phase-of-microsoft-partnership/" target="_blank">OpenAI Blog</a> · <a href="https://blogs.microsoft.com/blog/2026/04/27/the-next-phase-of-the-microsoft-openai-partnership/" target="_blank">Microsoft Blog</a> · 27/04/2026</div>
   </div>
-
-  <!-- Notícia 2 -->
+  
   <div class="card">
-    <h3>Google Diz Ter Impedido Grupo Hacker de Usar IA para "Evento de Exploração em Massa"</h3>
-    <div class="summary">
-      O Google revelou que identificou e provavelmente impediu um grupo hacker de utilizar ferramentas de IA para explorar vulnerabilidades de software em larga escala. A empresa afirmou que seu modelo Gemini não foi utilizado no ataque. Em abril, a Anthropic havia adiado o lançamento do modelo Mythos por preocupações semelhantes sobre uso malicioso de IA, o que gerou reuniões na Casa Branca com líderes de tecnologia.
+    <h3>Google Apresenta "Googlebook": Laptops com IA Gemini Nativa Substituem os Chromebooks</h3>
+    <p>
+      No evento Android Show, a Google revelou o Googlebook — nova categoria de laptops construídos com IA Gemini integrada ao núcleo do sistema operacional. Fabricantes como Acer, ASUS, Dell, HP e Lenovo produzirão as primeiras unidades. A IA é ativada ao agitar o cursor, automatizando tarefas como agendamento e criação de widgets por comandos de texto. Os dispositivos chegam no outono de 2026.
+    </p>
+    <div class="impact-box">
+      <strong>🎯 Impacto estratégico:</strong> Este é o sinal mais forte de que a interface humano-computador está migrando do modelo OS-centric para AI-centric. CTOs devem avaliar como ferramentas de desenvolvimento e workflows corporativos se adaptarão a essa nova camada de IA contextual embarcada no hardware.
     </div>
-    <div class="impact">
-      <div class="impact-label">🎯 Impacto Estratégico</div>
-      <p>A escalada de ameaças AI-powered exige que VPs de Engenharia acelerem investimentos em segurança ofensiva e defensiva. Equipes devem implementar threat modeling considerando adversários equipados com IA generativa e ferramentas como red-teaming automatizado.</p>
-    </div>
-    <a class="source-link" href="https://www.cnbc.com/2026/05/11/google-thwarts-effort-hacker-group-use-ai-mass-exploitation-event.html" target="_blank">📰 Fonte: CNBC</a>
+    <div class="source">Fonte: <a href="https://www.pcguia.pt/2026/05/adeus-chromebook-a-google-anunciou-uma-nova-geracao-de-computadores-portateis-centrados-em-ia/" target="_blank">PCGuia</a> · 12/05/2026</div>
   </div>
-
 </div>
 
-<!-- ============================================================ -->
 <!-- SEÇÃO 2: MERCADO FINANCEIRO -->
-<!-- ============================================================ -->
 <div class="section sec-fin">
   <div class="section-header">
-    <div class="section-number">2</div>
-    <div>
-      <div class="section-title">Mercado Financeiro</div>
-      <div class="section-subtitle">Brasil, câmbio e conjuntura global</div>
-    </div>
+    <span class="section-icon">📈</span>
+    <span class="section-title">Mercado Financeiro</span>
   </div>
-
-  <!-- Notícia 3 -->
+  
   <div class="card">
-    <h3>Ibovespa Cai aos 180 mil Pontos com Duplo Impacto: IPCA Doméstico e CPI nos EUA Acima de 3%</h3>
-    <div class="summary">
-      O Ibovespa abriu em queda nesta terça, operando aos 180,3 mil pontos, pressionado pela divulgação simultânea do IPCA no Brasil e do CPI nos EUA, que registrou segunda leitura consecutiva acima de 3%. O dólar comercial oscila ao redor de R$ 4,89 e juros futuros avançam. Ações da Petrobras recuam mais de 2% após lucro de R$ 32,7 bi no 1T26, queda de 7,2% anual. O petróleo segue em alta, com Trump classificando a proposta do Irã como "estúpida".
+    <h3>Ibovespa Cai com Geopolítica e Pesquisa Eleitoral; Dólar Volta a R$ 4,91</h3>
+    <p>
+      Nesta quarta-feira, o Ibovespa abriu em queda de 0,15%, a 180.073 pontos, com o dólar subindo para R$ 4,91. Investidores monitoram a viagem de Trump à China para cúpula com Xi Jinping, enquanto o impasse entre EUA e Irã segue sem resolução. No cenário doméstico, pesquisa Genial/Quaest mostra empate técnico entre Lula (42%) e Flávio Bolsonaro (41%) na corrida presidencial de outubro.
+    </p>
+    <div class="impact-box">
+      <strong>🎯 Impacto estratégico:</strong> A combinação de petróleo em US$ 105+, incerteza eleitoral e Selic em 14,50% demanda prudência nos planos de expansão e capex de TI. Líderes devem buscar eficiência operacional como hedge contra volatilidade macroeconômica.
     </div>
-    <div class="impact">
-      <div class="impact-label">🎯 Impacto Estratégico</div>
-      <p>A pressão inflacionária global combinada com juros altos reduz apetite para risco e encarece financiamento de startups e projetos de inovação. Líderes devem priorizar projetos com payback rápido e visibilidade de ROI em cenários de restrição monetária prolongada.</p>
-    </div>
-    <a class="source-link" href="https://www.infomoney.com.br/mercados/ibovespa-hoje-bolsa-de-valores-ao-vivo-12052026/" target="_blank">📰 Fonte: InfoMoney</a>
+    <div class="source">Fonte: <a href="https://www.cnnbrasil.com.br/economia/mercado/mercado-financeiro-ibovespa-dolar-13-maio-2026/" target="_blank">CNN Brasil</a> · 13/05/2026</div>
   </div>
-
-  <!-- Notícia 4 -->
+  
   <div class="card">
-    <h3>JPMorgan Reclassifica IA como Infraestrutura Core: US$ 19,8 bi em Tech Budget, US$ 2 bi Só em IA</h3>
-    <div class="summary">
-      O JPMorgan Chase formalizou a reclassificação dos investimentos em IA de "inovação discricionária" para "infraestrutura core", equiparando o gasto com data centers e cibersegurança. O banco opera com budget tecnológico de US$ 19,8 bilhões em 2026 e mais de 500 casos de uso de IA em produção. O CEO Jamie Dimon afirma que o investimento de US$ 2 bi em IA já se autofinancia com economia operacional equivalente, incluindo redução de 95% de falsos positivos em compliance AML.
+    <h3>Focus: Inflação Sobe pela 9ª Semana — IPCA em 4,91% e Selic 2027 Vai a 11,25%</h3>
+    <p>
+      O Boletim Focus divulgado pelo Banco Central nesta semana elevou a projeção do IPCA 2026 de 4,89% para 4,91%, acumulando nove semanas consecutivas de alta. A estimativa para a Selic em 2027 subiu de 11% para 11,25% ao ano, sinalizando juros altos por mais tempo. O IPCA de abril desacelerou para 0,67%, mas o acumulado de 12 meses subiu para 4,39%.
+    </p>
+    <div class="impact-box">
+      <strong>🎯 Impacto estratégico:</strong> Juros em patamar elevado por mais tempo encarecem financiamentos e aumentam a pressão sobre ROI de projetos de tecnologia. Priorize iniciativas com payback rápido e demonstração clara de valor — budgets de inovação estarão sob maior escrutínio.
     </div>
-    <div class="impact">
-      <div class="impact-label">🎯 Impacto Estratégico</div>
-      <p>A decisão do maior banco do mundo de tratar IA como OPEX — não CAPEX experimental — estabelece benchmark para todas as indústrias. Líderes de engenharia devem defender o orçamento de IA como custo operacional essencial, não como "projeto de inovação" sujeito a cortes.</p>
-    </div>
-    <a class="source-link" href="https://crypto.news/jpmorgan-makes-ai-core-infrastructure-spending/" target="_blank">📰 Fonte: Crypto News / Banking Exchange</a>
+    <div class="source">Fonte: <a href="https://www.infomoney.com.br/economia/boletim-focus-projecoes-11052026/" target="_blank">InfoMoney</a> · <a href="https://bmcnews.com.br/economia/boletim-focus-mercado-eleva-inflacao-para-2026-e-ve-selic-maior-em-2027/" target="_blank">BM&C News</a> · 11/05/2026</div>
   </div>
-
 </div>
 
-<!-- ============================================================ -->
 <!-- SEÇÃO 3: AGRONEGÓCIO & TI -->
-<!-- ============================================================ -->
 <div class="section sec-agro">
   <div class="section-header">
-    <div class="section-number">3</div>
-    <div>
-      <div class="section-title">Agronegócio &amp; TI</div>
-      <div class="section-subtitle">Agricultura digital, safra e tecnologia no campo</div>
-    </div>
+    <span class="section-icon">🌱</span>
+    <span class="section-title">Agronegócio &amp; TI</span>
   </div>
-
-  <!-- Notícia 5 -->
+  
   <div class="card">
-    <h3>AgroBrasília 2026 Reúne IA, Drones e IoT para o Cerrado em Semana de Inovação no Campo</h3>
-    <div class="summary">
-      A AgroBrasília 2026, prevista para 19 a 23 de maio no PAD-DF, consolida-se como vitrine de tecnologia agrícola para o Cerrado. A edição concentrará startups, empresas de IA, monitoramento remoto e gestão de dados, além de nove circuitos tecnológicos coordenados pela Emater-DF, com foco em manejo sustentável, irrigação e adaptação climática para pequenos e médios produtores.
+    <h3>AgroBrasília 2026 Reúne IA, Drones e IoT no Cerrado — Feira Começa na Próxima Semana</h3>
+    <p>
+      A AgroBrasília 2026 acontece de 19 a 23 de maio no PAD-DF, reunindo produtores, startups e empresas de tecnologia agrícola. O evento terá um espaço dedicado a soluções de IA, automação, monitoramento remoto e gestão de dados. Nove circuitos tecnológicos abordarão manejo sustentável, irrigação e adaptação ao Cerrado. A feira é referência em agricultura de precisão e conectividade no campo.
+    </p>
+    <div class="impact-box">
+      <strong>🎯 Impacto estratégico:</strong> O agro é o maior laboratório de edge computing e IoT do Brasil. Líderes de engenharia em fintechs, logtech e agtech devem mapear oportunidades de integração com plataformas agro — conectividade limitada exige soluções offline-first e sincronização resiliente.
     </div>
-    <div class="impact">
-      <div class="impact-label">🎯 Impacto Estratégico</div>
-      <p>Oportunidade para líderes de engenharia de agritechs e empresas de dados avaliarem demandas reais do campo. O evento evidencia que edge computing, IoT em áreas sem 5G e plataformas cloud-first são os gargalos técnicos críticos do agro 5.0 brasileiro.</p>
-    </div>
-    <a class="source-link" href="https://momentomt.com.br/momento-agro/agrobrasilia-2026-aposta-em-tecnologia-inovacao-e-agricultura-sustentavel/" target="_blank">📰 Fonte: MomentoMT</a>
+    <div class="source">Fonte: <a href="https://paranatinganews.com.br/agrobrasilia-2026-aposta-em-tecnologia-inovacao-e-agricultura-sustentavel/" target="_blank">Paranatingá News</a> · 11/05/2026</div>
   </div>
-
-  <!-- Notícia 6 -->
+  
   <div class="card">
-    <h3>StoneX Projeta 2ª Maior Safra de Cana do Centro-Sul: 632 mi de Toneladas Impulsionam Etanol</h3>
-    <div class="summary">
-      A corretora StoneX previu nesta terça-feira que a principal região canavieira do Brasil terá safra de 632,2 milhões de toneladas em 2026/27, a segunda maior da história, superando a estimativa de março (620,5 mi ton) graças a condições climáticas favoráveis. O excedente provavelmente será direcionado para aumento da produção de etanol. Paralelamente, o USDA estimou a safra de soja dos EUA em 4,435 bilhões de bushels.
+    <h3>Embrapa Leva APIs e Plataformas Digitais ao AgroSummit 2026 em Campinas</h3>
+    <p>
+      A Embrapa apresentará suas soluções digitais no AgroSummit 2026, em 20 de maio, em Campinas (SP). Destaque para a plataforma AgroAPI, com 10 APIs em modelo freemium para gestão, rastreabilidade e análise de dados agrícolas. O evento reunirá empresas de tecnologia e lideranças do setor para discutir digitalização da cadeia produtiva, da origem ao consumidor final.
+    </p>
+    <div class="impact-box">
+      <strong>🎯 Impacto estratégico:</strong> APIs públicas da Embrapa representam uma oportunidade de integração para desenvolvedores. O modelo freemium democratiza o acesso a dados estratégicos, permitindo construir aplicações de valor sobre infraestrutura de pesquisa pública — uma vantagem competitiva para agtech brasileiras.
     </div>
-    <div class="impact">
-      <div class="impact-label">🎯 Impacto Estratégico</div>
-      <p>A mega-safra demanda soluções de otimização logística, rastreabilidade e gestão de dados em tempo real. Líderes de TI do agro devem priorizar plataformas que integrem dados de campo a sistemas ERP para capturar valor na cadeia do etanol e grãos.</p>
-    </div>
-    <a class="source-link" href="https://www.infomoney.com.br/mercados/ibovespa-hoje-bolsa-de-valores-ao-vivo-12052026/" target="_blank">📰 Fonte: InfoMoney (via Reuters/StoneX)</a>
+    <div class="source">Fonte: <a href="https://www.portaldoagronegocio.com.br/tecnologia/pesquisas/noticias/embrapa-apresenta-apis-e-plataformas-digitais-no-agrosummit-2026" target="_blank">Portal do Agronegócio</a> · <a href="https://portal.agrosummit.com.br/agro-summit-2026-destaca-digitalizacao-como-pilar-de-gestao-do-agronegocio-em-cenario-de-desafios" target="_blank">Portal Agro Summit</a></div>
   </div>
-
 </div>
 
-<!-- ============================================================ -->
 <!-- SEÇÃO 4: GESTÃO DE PESSOAS & RH -->
-<!-- ============================================================ -->
 <div class="section sec-rh">
   <div class="section-header">
-    <div class="section-number">4</div>
-    <div>
-      <div class="section-title">Gestão de Pessoas &amp; RH</div>
-      <div class="section-subtitle">Reestruturação, talentos e futuro do trabalho</div>
-    </div>
+    <span class="section-icon">👥</span>
+    <span class="section-title">Gestão de Pessoas &amp; RH</span>
   </div>
-
-  <!-- Notícia 7 -->
+  
   <div class="card">
-    <h3>Demissões Aceleram em Maio: Cloudflare, Upwork e Coinbase Cortam Milhares Reestruturando em Torno da IA</h3>
-    <div class="summary">
-      Uma nova onda de demissões atingiu o setor de tecnologia em maio de 2026. A Cloudflare cortou 1.100 postos (20% do quadro) após aumento de 600% no uso interno de IA em três meses. A BILL reduziu headcount em até 30%, e a Upwork demitiu cerca de 25% da força de trabalho. O CEO da Cloudflare declarou que a empresa precisa ser "arquitetada para a era da IA agêntica".
+    <h3>IA Já Muda Quem é Contratado: Adaptabilidade Vale Tanto Quanto Experiência Técnica</h3>
+    <p>
+      Reportagem do Gizmodo Brasil destaca que empresas estão reformulando processos de contratação e redefinindo funções, buscando profissionais capazes de trabalhar ao lado da IA. Adaptabilidade e pensamento crítico já valem tanto quanto experiência técnica. Candidatos passaram a avaliar o nível tecnológico das empresas antes de aceitar ofertas — trabalhar em ambientes avançados é visto como forma de manter relevância profissional.
+    </p>
+    <div class="impact-box">
+      <strong>🎯 Impacto estratégico:</strong> Líderes de engenharia devem repensar job descriptions e critérios de avaliação. A capacidade de aprender novas ferramentas de IA rapidamente é agora diferencial competitivo na atração de talentos. Investir em employer branding tecnológico tornou-se essencial para reter os melhores.
     </div>
-    <div class="impact">
-      <div class="impact-label">🎯 Impacto Estratégico</div>
-      <p>A reestruturação em torno de IA não é mais tendência — é realidade operacional. Líderes de engenharia devem preparar planos de reskilling agressivos, mapear quais funções serão augmented vs. automated, e redesenhar squads para operar com agentes de IA como "membros de equipe".</p>
-    </div>
-    <a class="source-link" href="https://finance.yahoo.com/sectors/technology/articles/layoffs-accelerate-may-2026-firms-040430218.html" target="_blank">📰 Fonte: Yahoo Finance / BeInCrypto</a>
+    <div class="source">Fonte: <a href="https://www.gizmodo.com.br/a-inteligencia-artificial-ja-comecou-a-mudar-quem-e-contratado-pelas-empresas-e-o-conhecimento-tecnico-sozinho-pode-nao-ser-mais-suficiente-53295" target="_blank">Gizmodo Brasil</a> · 12/05/2026</div>
   </div>
-
-  <!-- Notícia 8 -->
+  
   <div class="card">
-    <h3>Gartner 2026: 4 Prioridades de CHROs — IA Revolucionando RH Pode Elevar Produtividade em 29%</h3>
-    <div class="summary">
-      Pesquisa do Gartner com 426 CHROs de 23 setores revelou que a principal prioridade de RH em 2026 é utilizar IA para revolucionar a área, com potencial de ganho de produtividade de até 29%. As outras três prioridades são: redesenhar a força de trabalho na era humano-máquina, mobilizar líderes para crescimento em incerteza e integrar cultura organizacional para impulsionar desempenho.
+    <h3>Gartner: IA Lidera Prioridades de RH — 75% das Empresas Já Usam IA no Setor</h3>
+    <p>
+      Segundo pesquisa Gartner com 426 CHROs de 23 setores, as prioridades de RH para 2026 são lideradas pela transformação via IA, que pode gerar ganhos de produtividade de até 29% no modelo operacional de RH. Na mesma direção, pesquisa da Factorial revelou que 75% das empresas usam IA no RH há pelo menos seis meses, mas 61% não monitoram métricas de impacto ou ética.
+    </p>
+    <div class="impact-box">
+      <strong>🎯 Impacto estratégico:</strong> O gap entre adoção e governança de IA em RH é alarmante. VP de Engenharia devem colaborar com CHROs para implementar frameworks de ética e compliance em IA — especialmente em recrutamento e avaliação de desempenho, onde vieses algorítmicos podem criar riscos legais significativos.
     </div>
-    <div class="impact">
-      <div class="impact-label">🎯 Impacto Estratégico</div>
-      <p>O RH está sendo refundamentado por IA — e isso impacta diretamente engineering leaders. Líderes devem trabalhar com People Ops para implementar People Analytics preditivo, desenvolver trilhas de carreira baseadas em skills (não cargos) e garantir que IA literacy seja meta de performance.</p>
-    </div>
-    <a class="source-link" href="https://www.gartner.com.br/pt-br/recursos-humanos/tendencias/principais-prioridades-para-lideres-de-rh" target="_blank">📰 Fonte: Gartner</a>
+    <div class="source">Fonte: <a href="https://www.gartner.com.br/pt-br/recursos-humanos/tendencias/principais-prioridades-para-lideres-de-rh" target="_blank">Gartner Brasil</a> · <a href="https://factorialhr.com.br/gestao-de-pessoas-rh-e-tecnologia" target="_blank">Factorial HR</a></div>
   </div>
-
 </div>
 
-<!-- ============================================================ -->
 <!-- SEÇÃO 5: LIDERANÇA EXECUTIVA -->
-<!-- ============================================================ -->
 <div class="section sec-lid">
   <div class="section-header">
-    <div class="section-number">5</div>
-    <div>
-      <div class="section-title">Liderança Executiva</div>
-      <div class="section-subtitle">Visão estratégica, C-level e governança</div>
-    </div>
+    <span class="section-icon">🏛️</span>
+    <span class="section-title">Liderança Executiva</span>
   </div>
-
-  <!-- Notícia 9 -->
+  
   <div class="card">
-    <h3>CNBC: A Ascensão do CAIO — Como a IA Está Redesenhando os Boardrooms Globais</h3>
-    <div class="summary">
-      Reportagem da CNBC examina como a criação do cargo de Chief AI Officer está transformando conselhos executivos. O relatório da IBM mostra que 59% dos respondentes esperam aumento de influência do CHRO, enquanto a pesquisa de Randy Bean aponta que 93,2% dos executivos citam "desafios culturais" — não limitações tecnológicas — como principal obstáculo para adoção de IA. A McKinsey destaca que a coordenação centralizada de IA é mais importante que o título.
+    <h3>IBM: Maioria das Empresas Já Tem Chief AI Officer — Influência do CHRO Cresce com IA</h3>
+    <p>
+      Relatório da IBM, comentado pela CNBC, mostra que a maioria das empresas agora possui cargos de Chief AI Officer (CAIO). McKinsey afirma que "IA está impulsionando a maior mudança organizacional desde as revoluções industrial e digital." Curiosamente, 59% dos respondentes esperam que a influência do CHRO cresça, já que a transformação de IA torna gestão de talentos e mudança cultural competências centrais do C-suite.
+    </p>
+    <div class="impact-box">
+      <strong>🎯 Impacto estratégico:</strong> Para VP de Engenharia e CTOs: a criação de um CAIO pode reduzir ambiguidade sobre ownership de IA na organização. Se sua empresa ainda não definiu governance clara para IA, o risco é perder velocidade competitiva — a coordenação centralizada das iniciativas de IA é mais importante que o título em si.
     </div>
-    <div class="impact">
-      <div class="impact-label">🎯 Impacto Estratégico</div>
-      <p>Para VPs de Engenharia, a mensagem é clara: a governança de IA é agora pauta de board. É preciso articular uma estrat
+    <div class="source">Fonte: <a href="https://www.cnbc.com/2026/05/11/heres-how-artificial-intelligence-is-changing-boardrooms.html" target="_blank">CNBC</a> · 11/05/2026</div>
+  </div>
+  
+  <div class="card">
+    <h3>CEO Outlook EY: IA Lidera Prioridades de 30% dos CEOs Brasileiros — Governança Ainda é Gargalo</h3>
+    <p>
+      Estudo CEO Outlook da EY-Parthenon revela que 30% dos CEOs brasileiros apontam IA como prioridade #1 para 2026. Machine learning é citado por 61% das empresas como força principal, e IA generativa por 43%. Porém, um estudo da FDC mostra que 42,7% dos executivos citam falta de conhecimento especializado como maior barreira, e 43,3% das empresas investem menos de 1% do orçamento em IA.
+    </p>
+    <div class="impact-box">
+      <strong>🎯 Impacto estratégico:</strong> A distância entre ambição e execução em IA nas empresas brasileiras é a maior oportunidade para líderes de engenharia. Quem conseguir construir bridge entre visão de negócio e implementação técnica — com governança, métricas de ROI e capacitação do time — se posiciona como ativo estratégico insubstituível.
+    </div>
+    <div class="source">Fonte: <a href="https://docmanagement.com.br/04/13/2026/inteligencia-artificial-lidera-prioridades-dos-ceos-para-2026/" target="_blank">Information Management / EY-Parthenon</a> · <a href="https://docmanagement.com.br/05/04/2026/empresas-priorizam-ia-mas-ainda-enfrentam-desafios-para-estruturar-governanca-e-lideranca-especializada/" target="_blank">FDC / Meta</a></div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="logo-text">REVISTA EXECUTIVA DE TECNOLOGIA</div>
+  <p>Curadoria diária para líderes de engenharia · São Paulo, Brasil</p>
+  <p>Quarta-feira, 13 de Maio de 2026 · Todas as notícias baseadas em fontes reais verificadas</p>
+  <p style="margin-top: 12px; color: #555;">
+    Indicadores: Ibovespa ~180.073 pts · USD/BRL R$ 4,9125 · Selic 14,50% · IPCA 12m 4,39% · Brent US$ 105,33/bbl<br>
+    Focus 2026: IPCA 4,91% · Selic 13,00% · PIB 1,85% · Dólar R$ 5,20
+  </p>
+  <p style="margin-top: 14px; color: #444; font-size: 11px;">
+    © 2026 · Gerada com IA · Fontes: CNN Brasil, CNBC, OpenAI, Microsoft, Gartner, EY, IBM, FDC, Embrapa, InfoMoney, Yahoo Finance
+  </p>
+</div>
+
+</body>
+</html>
