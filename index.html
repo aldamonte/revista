@@ -1,4 +1,4 @@
-Now I have all the data needed. Let me compile the HTML magazine.
+Now I have all the data I need. Let me compile the HTML newsletter.
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -8,68 +8,86 @@ Now I have all the data needed. Let me compile the HTML magazine.
 <title>Revista Executiva de Tecnologia — 18 de Maio de 2026</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #f5f0e8; font-family: Georgia, 'Times New Roman', serif; color: #2e3f52; line-height: 1.7; }
+  body { background: #f5f0e8; font-family: Georgia, 'Times New Roman', serif; color: #2e3f52; line-height: 1.6; }
   
   /* HEADER */
-  .header { background: #2e3f52; color: #f5f0e8; padding: 32px 24px 20px; text-align: center; border-bottom: 4px solid #c9a84c; }
-  .header-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #c9a84c; margin-bottom: 6px; }
+  .header { background: #2e3f52; color: #f5f0e8; padding: 32px 24px 18px; text-align: center; border-bottom: 4px solid #c9a84c; }
+  .header-eyebrow { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #c9a84c; margin-bottom: 6px; }
   .header h1 { font-size: 32px; font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
-  .header .edition { font-size: 14px; color: #b0bec5; font-style: italic; }
-  .header .date-line { font-size: 13px; color: #c9a84c; margin-top: 8px; letter-spacing: 1.5px; }
-  
-  /* TICKER BAR */
-  .ticker-bar { background: #111; color: #e0e0e0; padding: 12px 24px; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; font-size: 13px; font-family: 'Courier New', monospace; border-bottom: 2px solid #c9a84c; }
-  .ticker-item { display: inline-flex; align-items: center; gap: 6px; }
-  .ticker-label { color: #c9a84c; font-weight: bold; }
-  .ticker-val { color: #fff; }
-  .ticker-up { color: #4caf50; }
-  .ticker-down { color: #f44336; }
-  .ticker-neutral { color: #ffeb3b; }
+  .header .edition { font-size: 14px; font-style: italic; color: #b0bec5; }
+  .header .tagline { font-size: 12px; color: #8a9bae; margin-top: 6px; }
 
-  /* MAIN */
-  .main { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+  /* TICKER */
+  .ticker-bar { background: #111; color: #e0e0e0; padding: 10px 24px; font-family: 'Courier New', monospace; font-size: 13px; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; border-bottom: 2px solid #c9a84c; }
+  .ticker-item { white-space: nowrap; }
+  .ticker-label { color: #8a9bae; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+  .ticker-value { color: #c9a84c; font-weight: bold; }
+  .ticker-change-up { color: #66bb6a; font-size: 11px; }
+  .ticker-change-down { color: #ef5350; font-size: 11px; }
+
+  /* CONTAINER */
+  .container { max-width: 880px; margin: 0 auto; padding: 0 16px; }
 
   /* LEAD STORY */
-  .lead-story { background: #2e3f52; color: #f5f0e8; border-radius: 10px; padding: 32px 28px; margin-bottom: 36px; border-left: 5px solid #c9a84c; }
+  .lead-story { background: #2e3f52; color: #f5f0e8; margin: 28px auto; max-width: 880px; border-radius: 6px; padding: 32px 28px; border-left: 5px solid #c9a84c; }
   .lead-story .lead-tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #c9a84c; margin-bottom: 10px; }
-  .lead-story h2 { font-size: 26px; line-height: 1.35; margin-bottom: 14px; font-weight: 700; }
-  .lead-story p { font-size: 15px; line-height: 1.75; color: #cfd8dc; margin-bottom: 12px; }
-  .lead-story .impact-box { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); border-radius: 6px; padding: 14px 16px; margin-top: 14px; }
-  .lead-story .impact-label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #c9a84c; margin-bottom: 6px; }
-  .lead-story .impact-text { font-size: 14px; color: #e0e0e0; line-height: 1.65; }
-  .lead-story .source-link { display: inline-block; margin-top: 12px; color: #c9a84c; font-size: 13px; text-decoration: none; border-bottom: 1px dotted #c9a84c; }
+  .lead-story h2 { font-size: 26px; line-height: 1.3; margin-bottom: 14px; color: #fff; }
+  .lead-story p { font-size: 15px; line-height: 1.7; color: #cfd8dc; margin-bottom: 10px; }
+  .lead-story .impact { background: rgba(201,168,76,0.12); border-left: 3px solid #c9a84c; padding: 10px 14px; margin-top: 12px; border-radius: 3px; }
+  .lead-story .impact-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #c9a84c; margin-bottom: 4px; }
+  .lead-story .impact p { color: #b0bec5; font-size: 13px; margin-bottom: 0; }
+  .lead-story .source-link { display: inline-block; margin-top: 12px; color: #c9a84c; font-size: 12px; text-decoration: none; border-bottom: 1px dotted #c9a84c; }
+  .lead-story .source-link:hover { color: #fff; }
 
-  /* SECTION HEADERS */
-  .section { margin-bottom: 36px; }
+  /* SECTIONS */
+  .section { margin: 32px auto; max-width: 880px; }
   .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 2px solid; }
-  .section-icon { font-size: 22px; }
+  .section-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; flex-shrink: 0; }
   .section-title { font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
-  
-  .section-ai .section-header { border-color: #5c6bc0; }
-  .section-ai .section-title { color: #5c6bc0; }
-  .section-fin .section-header { border-color: #26a69a; }
-  .section-fin .section-title { color: #26a69a; }
-  .section-agro .section-header { border-color: #66bb6a; }
-  .section-agro .section-title { color: #66bb6a; }
-  .section-rh .section-header { border-color: #ef5350; }
-  .section-rh .section-title { color: #ef5350; }
-  .section-lid .section-header { border-color: #8d6e63; }
-  .section-lid .section-title { color: #8d6e63; }
+  .section-subtitle { font-size: 12px; color: #78909c; font-style: italic; }
+
+  /* COLOR THEMES */
+  .ai .section-header { border-color: #5c6bc0; }
+  .ai .section-icon { background: #5c6bc0; }
+  .ai .section-title { color: #5c6bc0; }
+  .ai .card { border-left: 4px solid #5c6bc0; }
+
+  .finance .section-header { border-color: #2e7d32; }
+  .finance .section-icon { background: #2e7d32; }
+  .finance .section-title { color: #2e7d32; }
+  .finance .card { border-left: 4px solid #2e7d32; }
+
+  .agro .section-header { border-color: #ef6c00; }
+  .agro .section-icon { background: #ef6c00; }
+  .agro .section-title { color: #ef6c00; }
+  .agro .card { border-left: 4px solid #ef6c00; }
+
+  .rh .section-header { border-color: #00838f; }
+  .rh .section-icon { background: #00838f; }
+  .rh .section-title { color: #00838f; }
+  .rh .card { border-left: 4px solid #00838f; }
+
+  .leadership .section-header { border-color: #6a1b9a; }
+  .leadership .section-icon { background: #6a1b9a; }
+  .leadership .section-title { color: #6a1b9a; }
+  .leadership .card { border-left: 4px solid #6a1b9a; }
 
   /* CARDS */
-  .card { background: #fff; border-radius: 8px; padding: 22px 22px 18px; margin-bottom: 18px; border: 1px solid #e0dcd4; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
-  .card h3 { font-size: 18px; line-height: 1.4; margin-bottom: 10px; color: #2e3f52; }
-  .card .summary { font-size: 14.5px; line-height: 1.7; color: #455a64; margin-bottom: 12px; }
-  .card .impact-box { background: #f9f6ef; border-left: 3px solid #c9a84c; padding: 12px 14px; border-radius: 0 6px 6px 0; margin-bottom: 10px; }
-  .card .impact-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #c9a84c; font-weight: bold; margin-bottom: 4px; }
-  .card .impact-text { font-size: 13.5px; color: #5d4037; line-height: 1.6; }
-  .card .source-link { color: #5c6bc0; font-size: 12.5px; text-decoration: none; border-bottom: 1px dotted #5c6bc0; }
-  .card .source-link:hover { color: #303f9f; }
+  .card { background: #fff; border-radius: 4px; padding: 20px 22px; margin-bottom: 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .card h3 { font-size: 17px; line-height: 1.35; margin-bottom: 8px; color: #2e3f52; }
+  .card .summary { font-size: 14px; color: #455a64; margin-bottom: 10px; line-height: 1.65; }
+  .card .impact-box { background: #f5f0e8; border-left: 3px solid #c9a84c; padding: 8px 12px; border-radius: 3px; margin-bottom: 10px; }
+  .card .impact-box .impact-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #8a6d3b; margin-bottom: 2px; font-weight: bold; }
+  .card .impact-box p { font-size: 13px; color: #5d4037; margin: 0; line-height: 1.5; }
+  .card .source { font-size: 11px; color: #90a4ae; }
+  .card .source a { color: #5c6bc0; text-decoration: none; border-bottom: 1px dotted #5c6bc0; }
+  .card .source a:hover { color: #2e3f52; }
 
   /* FOOTER */
-  .footer { background: #111; color: #9e9e9e; text-align: center; padding: 28px 24px; font-size: 12px; line-height: 1.7; margin-top: 20px; }
-  .footer .brand { color: #c9a84c; font-size: 14px; font-weight: bold; letter-spacing: 2px; margin-bottom: 6px; }
-  .footer a { color: #c9a84c; text-decoration: none; }
+  .footer { background: #111; color: #8a9bae; padding: 28px 24px; text-align: center; margin-top: 40px; }
+  .footer .footer-brand { font-size: 16px; color: #c9a84c; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .footer p { font-size: 12px; line-height: 1.6; }
+  .footer .disclaimer { font-size: 10px; color: #546e7a; margin-top: 10px; font-style: italic; }
 
   @media (max-width: 640px) {
     .header h1 { font-size: 22px; }
@@ -84,46 +102,48 @@ Now I have all the data needed. Let me compile the HTML magazine.
 
 <!-- HEADER -->
 <header class="header">
-  <div class="header-label">Curadoria Executiva Diária</div>
+  <div class="header-eyebrow">Curadoria Executiva Diária</div>
   <h1>Revista Executiva de Tecnologia</h1>
-  <div class="edition">Edição #138 — Para Líderes de Engenharia de Software</div>
-  <div class="date-line">Segunda-feira, 18 de Maio de 2026 · São Paulo, Brasil</div>
+  <div class="edition">Segunda-feira, 18 de Maio de 2026 · Edição #138 · São Paulo</div>
+  <div class="tagline">10 notícias estratégicas para líderes de engenharia e tecnologia</div>
 </header>
 
 <!-- TICKER BAR -->
 <div class="ticker-bar">
   <div class="ticker-item">
-    <span class="ticker-label">IBOVESPA</span>
-    <span class="ticker-val">177.283</span>
-    <span class="ticker-down">▼ 0,61%</span>
+    <span class="ticker-label">Ibovespa</span>
+    <span class="ticker-value">176.637</span>
+    <span class="ticker-change-down">▼ 0,51%</span>
   </div>
   <div class="ticker-item">
     <span class="ticker-label">USD/BRL</span>
-    <span class="ticker-val">R$ 5,07</span>
-    <span class="ticker-down">▲ 1,59%</span>
+    <span class="ticker-value">R$ 5,00</span>
+    <span class="ticker-change-down">▼ 1,0%</span>
   </div>
   <div class="ticker-item">
-    <span class="ticker-label">SELIC FOCUS</span>
-    <span class="ticker-val">13,25%</span>
-    <span class="ticker-up">▲</span>
+    <span class="ticker-label">Selic Atual</span>
+    <span class="ticker-value">14,50%</span>
   </div>
   <div class="ticker-item">
-    <span class="ticker-label">IPCA FOCUS 2026</span>
-    <span class="ticker-val">4,92%</span>
-    <span class="ticker-neutral">▲ 10ª alta</span>
+    <span class="ticker-label">Selic Focus 2026</span>
+    <span class="ticker-value">13,25%</span>
+    <span class="ticker-change-up">▲ 0,25 p.p.</span>
   </div>
   <div class="ticker-item">
-    <span class="ticker-label">BRENT</span>
-    <span class="ticker-val">US$ 110</span>
-    <span class="ticker-up">▲ 1,5%</span>
+    <span class="ticker-label">IPCA Focus 2026</span>
+    <span class="ticker-value">4,92%</span>
+    <span class="ticker-change-up">▲ 10ª alta</span>
+  </div>
+  <div class="ticker-item">
+    <span class="ticker-label">Brent</span>
+    <span class="ticker-value">US$ 110</span>
+    <span class="ticker-change-up">▲ 1,5%</span>
   </div>
 </div>
 
-<!-- MAIN -->
-<main class="main">
-
-  <!-- LEAD STORY -->
-  <article class="lead-story">
-    <div class="lead-tag">🔥 Destaque Principal — Inteligência Artificial</div>
-    <h2>Anthropic Mira Valuation de US$ 900 Bilhões e Investe US$ 50 Bi em Infraestrutura nos EUA</h2>
-    <p>
+<!-- LEAD STORY -->
+<div class="container">
+<article class="lead-story">
+  <div class="lead-tag">★ Destaque Principal — Inteligência Artificial</div>
+  <h2>Microsoft e OpenAI reescrevem parceria: fim da exclusividade Azure abre era multi-cloud para IA empresarial</h2>
+  <p>
