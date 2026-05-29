@@ -1,4 +1,4 @@
-Now I have all the data needed. Let me compile the HTML magazine.
+Now I have all the information needed to build the executive tech magazine. Let me compose the complete HTML.
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -8,130 +8,315 @@ Now I have all the data needed. Let me compile the HTML magazine.
 <title>Revista Executiva de Tecnologia — 29 de Maio de 2026</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #f5f0e8; font-family: Georgia, 'Times New Roman', serif; color: #2e3f52; line-height: 1.6; }
-  
+  body { background: #f5f0e8; font-family: Georgia, 'Times New Roman', serif; color: #2e3f52; line-height: 1.7; }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+
   /* HEADER */
-  .header { background: #2e3f52; color: #f5f0e8; padding: 40px 24px 30px; text-align: center; border-bottom: 4px solid #c9a84c; }
-  .header-top { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #c9a84c; margin-bottom: 8px; }
-  .header h1 { font-size: 38px; font-weight: 700; line-height: 1.15; margin-bottom: 6px; letter-spacing: -0.5px; }
-  .header .edition { font-size: 14px; color: #a0b4c8; font-style: italic; }
-  .header .tagline { font-size: 12px; color: #7a9bb5; margin-top: 10px; letter-spacing: 1px; }
+  header { background: #2e3f52; color: #f5f0e8; padding: 32px 0 18px; border-bottom: 4px solid #c9a84c; }
+  header .container { display: flex; flex-direction: column; align-items: center; }
+  .header-flag { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #c9a84c; margin-bottom: 4px; }
+  .header-title { font-size: 36px; font-weight: 700; letter-spacing: 1px; text-align: center; }
+  .header-sub { font-size: 13px; color: #a8b8c8; margin-top: 4px; letter-spacing: 1px; }
+  .header-date { font-size: 14px; color: #c9a84c; margin-top: 10px; font-style: italic; }
 
-  /* TICKER */
-  .ticker-bar { background: #111; color: #e8e0d0; padding: 12px 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; font-family: 'Courier New', monospace; font-size: 13px; border-bottom: 2px solid #c9a84c; }
-  .ticker-item { display: inline-flex; align-items: center; gap: 6px; }
-  .ticker-label { color: #c9a84c; font-weight: bold; }
+  /* TICKER BAR */
+  .ticker-bar { background: #111; color: #e0ddd5; padding: 12px 0; font-size: 13px; overflow: hidden; border-bottom: 2px solid #c9a84c; }
+  .ticker-inner { display: flex; justify-content: center; flex-wrap: wrap; gap: 18px; }
+  .ticker-item { white-space: nowrap; }
+  .ticker-label { color: #c9a84c; font-weight: 700; margin-right: 4px; }
   .ticker-val { color: #fff; }
-  .ticker-change-down { color: #e74c3c; }
-  .ticker-change-up { color: #2ecc71; }
-  .ticker-neutral { color: #f39c12; }
-
-  /* CONTAINER */
-  .container { max-width: 900px; margin: 0 auto; padding: 30px 20px; }
-
-  /* SECTION HEADERS */
-  .section-header { display: flex; align-items: center; gap: 12px; margin: 36px 0 20px; padding-bottom: 10px; border-bottom: 3px solid; }
-  .section-icon { font-size: 28px; }
-  .section-title { font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
-  .section-ai { border-color: #6c5ce7; }
-  .section-ai .section-title { color: #6c5ce7; }
-  .section-finance { border-color: #00b894; }
-  .section-finance .section-title { color: #00b894; }
-  .section-agro { border-color: #e17055; }
-  .section-agro .section-title { color: #e17055; }
-  .section-rh { border-color: #0984e3; }
-  .section-rh .section-title { color: #0984e3; }
-  .section-leadership { border-color: #d35400; }
-  .section-leadership .section-title { color: #d35400; }
+  .ticker-neg { color: #e74c3c; }
+  .ticker-pos { color: #2ecc71; }
 
   /* LEAD STORY */
-  .lead-card { background: #2e3f52; color: #f5f0e8; border-radius: 10px; padding: 32px 28px; margin-bottom: 24px; border-left: 5px solid #c9a84c; }
-  .lead-card .card-badge { background: #c9a84c; color: #2e3f52; font-size: 10px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; display: inline-block; margin-bottom: 14px; }
-  .lead-card h3 { font-size: 24px; line-height: 1.25; margin-bottom: 14px; color: #fff; }
-  .lead-card .card-summary { font-size: 15px; color: #c5d3e0; margin-bottom: 14px; line-height: 1.65; }
-  .lead-card .card-impact { background: rgba(201,168,76,0.15); border-left: 3px solid #c9a84c; padding: 12px 16px; border-radius: 4px; margin-bottom: 14px; }
-  .lead-card .card-impact strong { color: #c9a84c; }
-  .lead-card .card-impact span { font-size: 13px; color: #a0b4c8; }
-  .lead-card .card-source { font-size: 12px; color: #7a9bb5; }
-  .lead-card .card-source a { color: #c9a84c; text-decoration: none; }
+  .lead-story { background: #2e3f52; color: #f5f0e8; padding: 40px 0 36px; margin-bottom: 0; }
+  .lead-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #c9a84c; margin-bottom: 8px; }
+  .lead-headline { font-size: 28px; font-weight: 700; line-height: 1.35; margin-bottom: 14px; }
+  .lead-summary { font-size: 15px; line-height: 1.8; color: #cdd5de; margin-bottom: 14px; }
+  .lead-impact { background: rgba(201,168,76,0.12); border-left: 3px solid #c9a84c; padding: 12px 16px; font-size: 13px; color: #e0ddd5; margin-bottom: 12px; border-radius: 0 6px 6px 0; }
+  .lead-impact strong { color: #c9a84c; }
+  .lead-link { color: #c9a84c; font-size: 12px; text-decoration: none; border-bottom: 1px dotted #c9a84c; }
+  .lead-link:hover { color: #fff; }
 
-  /* REGULAR CARDS */
-  .card { background: #fff; border-radius: 8px; padding: 24px; margin-bottom: 20px; border: 1px solid #e0d8c8; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
-  .card .card-badge { font-size: 10px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; display: inline-block; margin-bottom: 12px; }
-  .badge-ai { background: #ede7f6; color: #6c5ce7; }
-  .badge-finance { background: #e0f2f1; color: #00b894; }
-  .badge-agro { background: #fbe9e7; color: #e17055; }
-  .badge-rh { background: #e3f2fd; color: #0984e3; }
-  .badge-leadership { background: #fff3e0; color: #d35400; }
-  .card h3 { font-size: 19px; line-height: 1.3; margin-bottom: 10px; color: #2e3f52; }
-  .card .card-summary { font-size: 14px; color: #555; margin-bottom: 12px; line-height: 1.6; }
-  .card .card-impact { background: #faf7f0; border-left: 3px solid #c9a84c; padding: 10px 14px; border-radius: 4px; margin-bottom: 12px; }
-  .card .card-impact strong { color: #8b7530; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
-  .card .card-impact span { font-size: 13px; color: #666; display: block; margin-top: 4px; }
-  .card .card-source { font-size: 12px; color: #999; }
-  .card .card-source a { color: #6c5ce7; text-decoration: none; }
+  /* SECTIONS */
+  .section { padding: 36px 0 20px; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; border-bottom: 2px solid; padding-bottom: 8px; }
+  .section-icon { font-size: 22px; }
+  .section-title { font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+  .section-num { font-size: 11px; color: #888; letter-spacing: 2px; text-transform: uppercase; }
+
+  /* Color themes */
+  .sec-ia .section-header { border-color: #3498db; color: #2e3f52; }
+  .sec-fin .section-header { border-color: #27ae60; color: #2e3f52; }
+  .sec-agro .section-header { border-color: #e67e22; color: #2e3f52; }
+  .sec-rh .section-header { border-color: #8e44ad; color: #2e3f52; }
+  .sec-lid .section-header { border-color: #c0392b; color: #2e3f52; }
+
+  /* CARDS */
+  .card { background: #fff; border: 1px solid #ddd6c8; border-radius: 8px; padding: 22px 24px; margin-bottom: 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+  .card-headline { font-size: 17px; font-weight: 700; margin-bottom: 8px; line-height: 1.4; color: #2e3f52; }
+  .card-summary { font-size: 14px; color: #4a5568; margin-bottom: 10px; line-height: 1.75; }
+  .card-impact { background: #f9f6ef; border-left: 3px solid #c9a84c; padding: 10px 14px; font-size: 12.5px; color: #555; margin-bottom: 10px; border-radius: 0 4px 4px 0; }
+  .card-impact strong { color: #2e3f52; }
+  .card-source { font-size: 11px; color: #999; }
+  .card-source a { color: #3498db; text-decoration: none; }
+  .card-source a:hover { text-decoration: underline; }
+
+  .sec-ia .card { border-left: 3px solid #3498db; }
+  .sec-fin .card { border-left: 3px solid #27ae60; }
+  .sec-agro .card { border-left: 3px solid #e67e22; }
+  .sec-rh .card { border-left: 3px solid #8e44ad; }
+  .sec-lid .card { border-left: 3px solid #c0392b; }
 
   /* FOOTER */
-  .footer { background: #111; color: #888; text-align: center; padding: 30px 20px; margin-top: 40px; font-size: 12px; line-height: 1.8; }
-  .footer .footer-brand { color: #c9a84c; font-size: 14px; font-weight: bold; letter-spacing: 2px; margin-bottom: 6px; }
-  .footer a { color: #c9a84c; text-decoration: none; }
+  footer { background: #111; color: #777; padding: 30px 0; text-align: center; font-size: 12px; margin-top: 20px; }
+  footer .footer-brand { color: #c9a84c; font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  footer a { color: #c9a84c; text-decoration: none; }
 
   @media (max-width: 640px) {
-    .header h1 { font-size: 26px; }
-    .lead-card h3 { font-size: 20px; }
-    .ticker-bar { font-size: 11px; gap: 10px; }
+    .header-title { font-size: 24px; }
+    .lead-headline { font-size: 21px; }
+    .card { padding: 16px 18px; }
+    .ticker-inner { gap: 10px; font-size: 11px; }
   }
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
-<header class="header">
-  <div class="header-top">Curadoria Executiva Diária</div>
-  <h1>Revista Executiva de Tecnologia</h1>
-  <div class="edition">Sexta-feira, 29 de Maio de 2026 · Edição #148 · São Paulo, Brasil</div>
-  <div class="tagline">10 notícias estratégicas para líderes de engenharia de software</div>
+<header>
+  <div class="container">
+    <div class="header-flag">Curadoria Executiva</div>
+    <div class="header-title">Revista Executiva de Tecnologia</div>
+    <div class="header-sub">Inteligência para líderes de engenharia &bull; São Paulo, Brasil</div>
+    <div class="header-date">Sexta-feira, 29 de Maio de 2026 &mdash; Edição #218</div>
+  </div>
 </header>
 
 <!-- TICKER BAR -->
 <div class="ticker-bar">
-  <div class="ticker-item">
-    <span class="ticker-label">IBOV</span>
-    <span class="ticker-val">175.063</span>
-    <span class="ticker-change-down">▼ −0,39%</span>
-  </div>
-  <div class="ticker-item">
-    <span class="ticker-label">USD/BRL</span>
-    <span class="ticker-val">R$ 5,06</span>
-    <span class="ticker-change-down">▼ +0,2%</span>
-  </div>
-  <div class="ticker-item">
-    <span class="ticker-label">SELIC Focus</span>
-    <span class="ticker-val">13,25%</span>
-    <span class="ticker-change-up">▲</span>
-  </div>
-  <div class="ticker-item">
-    <span class="ticker-label">IPCA Focus</span>
-    <span class="ticker-val">4,92%</span>
-    <span class="ticker-neutral">⚠ acima do teto</span>
-  </div>
-  <div class="ticker-item">
-    <span class="ticker-label">Brent</span>
-    <span class="ticker-val">US$ 91,81</span>
-    <span class="ticker-change-down">▼ −0,96%</span>
+  <div class="container">
+    <div class="ticker-inner">
+      <div class="ticker-item">
+        <span class="ticker-label">IBOVESPA</span>
+        <span class="ticker-val">173.559 pts</span>
+        <span class="ticker-neg"> ▼ -0,86%</span>
+      </div>
+      <div class="ticker-item">
+        <span class="ticker-label">USD/BRL</span>
+        <span class="ticker-val">R$ 5,05</span>
+        <span class="ticker-neg"> ▲ +0,27%</span>
+      </div>
+      <div class="ticker-item">
+        <span class="ticker-label">SELIC ATUAL</span>
+        <span class="ticker-val">14,50% a.a.</span>
+      </div>
+      <div class="ticker-item">
+        <span class="ticker-label">SELIC FOCUS 2026</span>
+        <span class="ticker-val">13,25%</span>
+      </div>
+      <div class="ticker-item">
+        <span class="ticker-label">IPCA FOCUS 2026</span>
+        <span class="ticker-val">4,92%</span>
+      </div>
+      <div class="ticker-item">
+        <span class="ticker-label">BRENT</span>
+        <span class="ticker-val">US$ 92,19</span>
+        <span class="ticker-neg"> ▼ queda mensal</span>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="container">
+<!-- LEAD STORY -->
+<div class="lead-story">
+  <div class="container">
+    <div class="lead-label">&#9733; Destaque do Dia &mdash; Inteligência Artificial</div>
+    <h1 class="lead-headline">Anthropic Mythos Encontra Milhares de Vulnerabilidades Zero-Day em Todos os Principais Sistemas Operacionais e Navegadores</h1>
+    <p class="lead-summary">
+      O modelo Claude Mythos Preview da Anthropic identificou de forma autônoma milhares de vulnerabilidades de alta severidade nunca antes conhecidas — incluindo um bug de 27 anos no OpenBSD e 271 falhas no Firefox. O modelo demonstra capacidade de encadear exploits complexos sem intervenção humana, forçando bancos, governos e Big Tech a repensar toda a infraestrutura de cibersegurança. O acesso permanece restrito via Project Glasswing a cerca de 40 empresas, incluindo Amazon, Microsoft e JPMorgan, com US$ 100M em créditos doados para defesa cibernética.
+    </p>
+    <div class="lead-impact">
+      <strong>⚡ Impacto para Líderes de Engenharia:</strong> A era da descoberta automatizada de vulnerabilidades exige revisão imediata de pipelines de segurança. Equipes de engenharia devem priorizar a migração de sistemas legados, implementar security-by-design e avaliar acesso a programas de defesa via Glasswing. A vantagem inicial favorece ofensores — o patching precisa acelerar radicalmente.
+    </div>
+    <a class="lead-link" href="https://www.anthropic.com/glasswing" target="_blank">Fonte: Anthropic — Project Glasswing →</a>
+  </div>
+</div>
 
-  <!-- ====== SEÇÃO 1: IA ====== -->
-  <div class="section-header section-ai">
-    <span class="section-icon">🤖</span>
-    <span class="section-title">Inteligência Artificial</span>
+<!-- SEÇÃO 1: INTELIGÊNCIA ARTIFICIAL -->
+<div class="container">
+  <div class="section sec-ia">
+    <div class="section-header">
+      <span class="section-icon">🤖</span>
+      <span class="section-title">Inteligência Artificial</span>
+      <span class="section-num">Seção 01</span>
+    </div>
+
+    <div class="card">
+      <div class="card-headline">OpenAI Publica Frontier Governance Framework para Alinhar Segurança com Legislação Global</div>
+      <div class="card-summary">
+        A OpenAI publicou ontem seu Frontier Governance Framework, documento público que detalha como suas práticas de segurança se alinham com requisitos legais emergentes, incluindo o California Transparency in Frontier AI Act e o EU AI Act Code of Practice. O framework cobre avaliação de riscos em áreas como ciber-ofensa, riscos CBRN, manipulação e perda de controle de modelos, além de protocolos de resposta a incidentes.
+      </div>
+      <div class="card-impact">
+        <strong>⚡ Impacto Estratégico:</strong> Para CTOs e VPs de Engenharia, este framework sinaliza a padronização regulatória global da IA. Organizações que operam modelos de fronteira devem alinhar suas práticas de governança interna a esse novo padrão antes dos prazos do EU AI Act em agosto de 2026.
+      </div>
+      <div class="card-source">Fonte: <a href="https://openai.com/index/openai-frontier-governance-framework/" target="_blank">OpenAI — Safety, 28/05/2026</a></div>
+    </div>
+
+    <div class="card">
+      <div class="card-headline">Sam Altman Recua: "Apocalipse de Empregos por IA é Improvável" — Augmentação Supera Substituição</div>
+      <div class="card-summary">
+        Em evento em Sydney, o CEO da OpenAI reconheceu que errou sobre o impacto de curto prazo da IA no mercado de trabalho, afirmando que a interação humana permanece essencial na maioria das profissões. Dados reais de adoção mostram que a augmentação, e não a substituição completa, é o padrão dominante — embora áreas como suporte ao cliente possam praticamente desaparecer.
+      </div>
+      <div class="card-impact">
+        <strong>⚡ Impacto Estratégico:</strong> A recalibração valida a estratégia de "humano + IA" para líderes de engenharia. Foco deve ser em requalificação e produtividade assistida, não em substituição massiva de equipes. Ajuste roadmaps de automação com expectativas realistas de ROI.
+      </div>
+      <div class="card-source">Fonte: <a href="https://techstartups.com/2026/05/26/top-tech-news-today-may-26-2026/" target="_blank">Tech Startups, 26/05/2026</a></div>
+    </div>
   </div>
 
-  <!-- LEAD STORY -->
-  <article class="lead-card">
-    <span class="card-badge">Destaque do Dia</span>
-    <h3>Anthropic lança Claude Opus 4.8 e confirma liberação do Mythos para todos os clientes "nas próximas semanas"</h3>
-    <div class="card-summary">
+  <!-- SEÇÃO 2: MERCADO FINANCEIRO -->
+  <div class="section sec-fin">
+    <div class="section-header">
+      <span class="section-icon">📈</span>
+      <span class="section-title">Mercado Financeiro</span>
+      <span class="section-num">Seção 02</span>
+    </div>
+
+    <div class="card">
+      <div class="card-headline">PIB do Brasil Surpreende: Alta de 1,1% no 1T26 com Impulso do Consumo e Serviços</div>
+      <div class="card-summary">
+        O IBGE divulgou hoje que o PIB brasileiro cresceu 1,1% no primeiro trimestre de 2026, superando a expectativa de 1,0% da Reuters. O investimento (FBCF) saltou 3,5% após queda de 3,4% no trimestre anterior, e o consumo das famílias acompanhou o ritmo do PIB. Economistas da FGV e C6 Bank alertam que este deve ser o dado mais forte do ano, com desaceleração nos próximos trimestres dado o aperto monetário.
+      </div>
+      <div class="card-impact">
+        <strong>⚡ Impacto Estratégico:</strong> O dado positivo do PIB beneficia setores de TI e serviços digitais (crescimento de 2,4% em Informação e Comunicação). Porém, o cenário de Selic a 14,50% exige cautela em investimentos de longo prazo e planejamento de CAPEX.
+      </div>
+      <div class="card-source">Fonte: <a href="https://www.infomoney.com.br/economia/pib-brasil-primeiro-trimestre-2026-ibge/" target="_blank">InfoMoney / IBGE, 29/05/2026</a></div>
+    </div>
+
+    <div class="card">
+      <div class="card-headline">Focus Eleva Selic para 13,25% e IPCA Bate 4,92% — Pressão Inflacionária Persiste</div>
+      <div class="card-summary">
+        O Boletim Focus mais recente mostra a 10ª elevação consecutiva da projeção do IPCA para 2026, agora em 4,92% — acima do teto da meta de 4,50%. A Selic esperada para o fim do ano subiu de 13% para 13,25%. A combinação de política fiscal expansionista e juros restritivos mantém o mercado cauteloso, com fluxo cambial negativo de US$ 2 bilhões em maio.
+      </div>
+      <div class="card-impact">
+        <strong>⚡ Impacto Estratégico:</strong> Custo de capital elevado por mais tempo pressiona valuation de tech companies e orçamentos de TI. Líderes devem priorizar projetos com ROI de curto prazo e considerar estruturas de capital mais conservadoras.
+      </div>
+      <div class="card-source">Fonte: <a href="https://www.cnnbrasil.com.br/economia/macroeconomia/focus-mercado-eleva-projecao-e-passa-a-ver-selic-a-1325-em-2026/" target="_blank">CNN Brasil / Banco Central, 18/05/2026</a></div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3: AGRONEGÓCIO & TI -->
+  <div class="section sec-agro">
+    <div class="section-header">
+      <span class="section-icon">🌾</span>
+      <span class="section-title">Agronegócio &amp; TI</span>
+      <span class="section-num">Seção 03</span>
+    </div>
+
+    <div class="card">
+      <div class="card-headline">Embrapa Lança Plataforma de IA e IoT na Agrishow 2026 com Rede de 56 Pesquisadores para Agricultura Espacial</div>
+      <div class="card-summary">
+        A Embrapa Instrumentação destaca a unidade Embrapii ITECH-Agro, que integra nanotecnologia, fotônica, IoT e inteligência artificial para agricultura de precisão. Em paralelo, a Rede Space Farming Brazil reúne 56 pesquisadores de 22 instituições para desenvolver tecnologias de cultivo baseadas em IA e automação, com potencial investimento de R$ 20 milhões da Agência Espacial Brasileira.
+      </div>
+      <div class="card-impact">
+        <strong>⚡ Impacto Estratégico:</strong> A convergência agro-espacial abre oportunidades para empresas de TI em edge computing, sensoriamento remoto e analytics preditivos. Empresas de software devem avaliar parcerias com a Embrapa e ecossistema ILPF para ampliar mercado addressable.
+      </div>
+      <div class="card-source">Fonte: <a href="https://www.embrapa.br/busca-de-noticias/-/noticia/115580721/embrapa-apresenta-inovacoes-em-sustentabilidade-bioeconomia-e-agricultura-digital-na-agrishow-2026" target="_blank">Portal Embrapa, Agrishow 2026</a></div>
+    </div>
+
+    <div class="card">
+      <div class="card-headline">84% dos Produtores Usam Soluções Digitais, Mas 56% Ainda Operam por Planilhas — Lacuna Exige Intervenção de TI</div>
+      <div class="card-summary">
+        Dados do setor revelam uma transição incompleta: embora a maioria dos produtores brasileiros já utilize alguma solução digital, mais da metade ainda gerencia atividades com Excel. A cibersegurança torna-se imperativa, com sistemas de automação agrícola conectados se tornando alvos de ransomware. Cooperativas são alertadas que negligenciar segurança digital comprometerá competitividade.
+      </div>
+      <div class="card-impact">
+        <strong>⚡ Impacto Estratégico:</strong> A lacuna entre adoção e maturidade digital no agro é uma oportunidade massiva para empresas de SaaS e ERP. Líderes de engenharia devem focar em soluções offline-first, edge computing e interfaces simplificadas para operadores de campo.
+      </div>
+      <div class="card-source">Fonte: <a href="https://itshow.com.br/transformacao-digital-agronegocio-tendencias-2026/" target="_blank">IT Show / Análise Setor Agro 2026</a></div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 4: GESTÃO DE PESSOAS & RH -->
+  <div class="section sec-rh">
+    <div class="section-header">
+      <span class="section-icon">👥</span>
+      <span class="section-title">Gestão de Pessoas &amp; RH</span>
+      <span class="section-num">Seção 04</span>
+    </div>
+
+    <div class="card">
+      <div class="card-headline">Gartner: IA no RH Pode Gerar 29% de Ganho em Produtividade — Mas Prioridade é Governança</div>
+      <div class="card-summary">
+        A pesquisa anual do Gartner com 426 CHROs de 23 setores identifica quatro prioridades para 2026: utilizar IA para revolucionar o RH, moldar o trabalho na era humano-máquina, mobilizar líderes para crescimento sob incerteza e integrar cultura organizacional ao desempenho. O RH é apontado como a área com maior potencial de ganho de produtividade via IA, com projeção de até 29%.
+      </div>
+      <div class="card-impact">
+        <strong>⚡ Impacto Estratégico:</strong> O RH como "motor de produtividade com IA" redefine a relação entre engenharia e gestão de pessoas. VPs de Engenharia devem co-construir com o RH estratégias de people analytics que informem decisões de alocação de talentos em projetos de IA.
+      </div>
+      <div class="card-source">Fonte: <a href="https://www.gartner.com.br/pt-br/recursos-humanos/tendencias/principais-prioridades-para-lideres-de-rh" target="_blank">Gartner HR Priorities 2026</a></div>
+    </div>
+
+    <div class="card">
+      <div class="card-headline">75% das Empresas Já Usam IA no RH, Mas 61% Não Monitoram Impacto — Ética e Métricas São Urgentes</div>
+      <div class="card-summary">
+        Dados do evento Tendências de RH 2026, organizado pela Factorial, revelam que 78% dos profissionais já usam IA no trabalho (83% recorrem ao ChatGPT), mas 61% das organizações não monitoram métricas de impacto, ética ou privacidade e 46% ainda não têm plano formal de implementação. O RH assume papel de "intérprete" entre tecnologia e pessoas.
+      </div>
+      <div class="card-impact">
+        <strong>⚡ Impacto Estratégico:</strong> A lacuna de governança de IA no RH é um risco organizacional crítico. Líderes de engenharia devem liderar a criação de frameworks de ética e compliance para IA, envolvendo RH, jurídico e segurança da informação em comitês multidisciplinares.
+      </div>
+      <div class="card-source">Fonte: <a href="https://factorialhr.com.br/gestao-de-pessoas-rh-e-tecnologia" target="_blank">Factorial — Tendências de RH 2026</a></div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 5: LIDERANÇA EXECUTIVA -->
+  <div class="section sec-lid">
+    <div class="section-header">
+      <span class="section-icon">🏛️</span>
+      <span class="section-title">Liderança Executiva</span>
+      <span class="section-num">Seção 05</span>
+    </div>
+
+    <div class="card">
+      <div class="card-headline">Lloyds Banking Coloca IA na Sala de Diretoria — Primeiro FTSE 100 com "Board Bot" para Decisões Executivas</div>
+      <div class="card-summary">
+        O Lloyds Banking Group tornou-se a primeira empresa do FTSE 100 a implementar um agente de IA especializado em sua sala de diretoria, com acesso a materiais confidenciais para apoiar conselheiros na preparação de reuniões e na redução de viés cognitivo em decisões. O bot, desenvolvido pela Board Intelligence, cobre M&A, análise financeira, cybersecurity e sustentabilidade. A próxima fase prevê que a IA possa "interromper e dizer: estou em desacordo".
+      </div>
+      <div class="card-impact">
+        <strong>⚡ Impacto Estratégico:</strong> A governança assistida por IA no board level é o novo padrão emergente. CTOs e líderes de engenharia devem preparar arquiteturas de IA com isolamento de dados governance-grade, audit trails e resistência a alucinações para escalar para decisões executivas.
+      </div>
+      <div class="card-source">Fonte: <a href="https://www.fintechfutures.com/ai-in-fintech/lloyds-banking-group-deploys-ai-boardroom-bot" target="_blank">FinTech Futures, Abril 2026</a></div>
+    </div>
+
+    <div class="card">
+      <div class="card-headline">IBM: 95% dos Executivos Veem Decisão Rápida Como Vantagem Competitiva Essencial em 2026</div>
+      <div class="card-summary">
+        O Business Trends Report 2026 da IBM revela que a capacidade de tomar decisões rápidas é vista como vantagem competitiva essencial por 95% dos executivos globais. Ao mesmo tempo, 81% dos colaboradores se dizem confiantes em acompanhar avanços tecnológicos. A FDC (Fundação Dom Cabral) aponta quatro movimentos prioritários para líderes: ciclos curtos de revisão, competências cognitivas e colaborativas, experimentação ética e tradução entre tecnologia e negócio.
+      </div>
+      <div class="card-impact">
+        <strong>⚡ Impacto Estratégico:</strong> Para líderes de engenharia, a velocidade de decisão exige pipelines de dados em tempo real, dashboards acionáveis e governança ágil. O papel do líder de tecnologia evolui de gestor técnico para "tradutor estratégico" entre IA e resultado de negócio.
+      </div>
+      <div class="card-source">Fonte: <a href="https://sejarelevante.fdc.org.br/megatendencias-lideranca-2026/" target="_blank">FDC / IBM Business Trends Report 2026</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-brand">Revista Executiva de Tecnologia</div>
+    <p>Curadoria diária para líderes seniores de engenharia de software &bull; São Paulo, Brasil</p>
+    <p style="margin-top: 8px;">Edição de 29/05/2026 &bull; 10 notícias em 5 seções &bull; Fontes verificadas</p>
+    <p style="margin-top: 8px; color: #555;">
+      Dados financeiros: <a href="https://www.cnnbrasil.com.br" target="_blank">CNN Brasil</a> &bull;
+      <a href="https://br.investing.com" target="_blank">Investing.com</a> &bull;
+      <a href="https://www.bcb.gov.br" target="_blank">Banco Central</a>
+    </p>
+    <p style="margin-top: 14px; font-size: 11px; color: #444;">
+      Esta publicação é gerada com auxílio de IA e curadoria editorial. Todas as notícias são baseadas em fontes públicas verificáveis.<br>
+      Não constitui recomendação de investimento. &copy; 2026 Revista Executiva de Tecnologia.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
